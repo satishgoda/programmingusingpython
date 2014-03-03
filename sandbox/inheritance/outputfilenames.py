@@ -29,14 +29,21 @@ class OutputFilename(object):
 
 class OutputImageFilename(OutputFilename):
     ext = 'png'
-    def __init__(self, context):
-        super(OutputImageFilename, self).__init__(context)    
+    suffix_num = 0
     
+    def __init__(self, context, suffix=''):
+        super(OutputImageFilename, self).__init__(context)
+        if suffix:
+            self.suffix=suffix    
+    
+    def getSuffix(self):
+        suffix_base = super(OutputImageFilename, self).getSuffix()
+        return '.'.join([suffix_base, str(self.suffix_num)])
         
 if __name__ == '__main__':
     import bpy
     context = bpy.context
     ofn1 = OutputFilename(context)
     print(ofn1.filepath)
-    oifn1 = OutputImageFilename(context)
+    oifn1 = OutputImageFilename(context, 'AREA')
     print(oifn1.filepath)

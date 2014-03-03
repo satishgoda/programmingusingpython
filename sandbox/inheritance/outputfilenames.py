@@ -38,7 +38,7 @@ class OutputImageFilename(OutputFilename):
     
     def getSuffix(self):
         suffix_base = super(OutputImageFilename, self).getSuffix()
-        return '.'.join([suffix_base, str(self.suffix_num)])
+        return '.'.join([suffix_base, "{0:02}".format(self.suffix_num)])
         
 if __name__ == '__main__':
     import bpy

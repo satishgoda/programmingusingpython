@@ -13,3 +13,4 @@ upper: UPPER
 >>> lower = Foo("LOWER")
 >>> lower(str.lower)
 LOWER: lower
+

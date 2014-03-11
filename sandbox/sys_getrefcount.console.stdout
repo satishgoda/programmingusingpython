@@ -1,0 +1,34 @@
+PYTHON INTERACTIVE CONSOLE 3.3.3 (default, Jan 27 2014, 16:25:46)  [GCC 4.7.1]
+
+Command History:     Up/Down Arrow
+Cursor:              Left/Right Home/End
+Remove:              Backspace/Delete
+Execute:             Enter
+Autocomplete:        Ctrl-Space
+Zoom:                Ctrl +/-, Ctrl-Wheel
+Builtin Modules:     bpy, bpy.data, bpy.ops, bpy.props, bpy.types, bpy.context, bpy.utils, bgl, blf, mathutils
+Convenience Imports: from mathutils import *; from math import *
+Convenience Variables: C = bpy.context, D = bpy.data
+
+>>> import sys
+>>> 
+>>> sys.getrefcount('antigravity')
+2
+
+>>> 
+>>> import antigravity
+>>> 
+>>> sys.getrefcount('antigravity')
+3
+
+>>> antigravity
+<module 'antigravity' from '/home/satishg/bin/blenderinstalldir/blender-2.70-RC1-linux-glibc211-x86_64/2.70/python/lib/python3.3/antigravity.py'>
+
+>>> 
+>>> sys.getrefcount('antigravity')
+3
+
+>>> del antigravity
+>>> 
+>>> sys.getrefcount('antigravity')
+2

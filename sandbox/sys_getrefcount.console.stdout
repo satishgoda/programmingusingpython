@@ -11,24 +11,40 @@ Convenience Imports: from mathutils import *; from math import *
 Convenience Variables: C = bpy.context, D = bpy.data
 
 >>> import sys
->>> 
+
 >>> sys.getrefcount('antigravity')
 2
 
->>> 
+
 >>> import antigravity
->>> 
+
 >>> sys.getrefcount('antigravity')
 3
 
 >>> antigravity
 <module 'antigravity' from '/home/satishg/bin/blenderinstalldir/blender-2.70-RC1-linux-glibc211-x86_64/2.70/python/lib/python3.3/antigravity.py'>
 
->>> 
+
 >>> sys.getrefcount('antigravity')
 3
 
 >>> del antigravity
->>> 
+
 >>> sys.getrefcount('antigravity')
 2
+
+>>> sys.modules['antigravity']
+<module 'antigravity' from '/home/satishg/bin/blenderinstalldir/blender-2.70-RC1-linux-glibc211-x86_64/2.70/python/lib/python3.3/antigravity.py'>
+
+>>> sys.getrefcount('antigravity')
+2
+
+>>> antigravity
+Traceback (most recent call last):
+  File "<blender_console>", line 1, in <module>
+NameError: name 'antigravity' is not defined
+
+>>> antigravity = sys.modules['antigravity']
+
+>>> sys.getrefcount('antigravity')
+4

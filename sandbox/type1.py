@@ -1,5 +1,5 @@
 >>> ABC = type("ABC", (object,), { char: char.upper() for char in 'abc'})
->>> 
+
 >>> ABC
 <class '__main__.ABC'>
 

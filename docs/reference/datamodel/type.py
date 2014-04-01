@@ -4,6 +4,9 @@ from itertools import chain
 class aobject:
     whatsit = 'application base object'
 
+    def _init__message(self):
+        print("Inititlizing instance {} of class {}".format(self, type(self)))
+
 
 class MyMeta(type):
     def __new__(cls, name, bases, classdict, **args):
@@ -24,14 +27,14 @@ class MyMeta(type):
 
 class A(metaclass=MyMeta):
     """My custom meta class"""
-    pass
+    def __init__(self):
+        self._init__message()        
 
 
 if __name__ == '__main__':
+    print("class {} of type {}".format(A, type(A)))
+    
     a = A()
-    print(A)
-    print(a)
-    print(type(A))
-    print(type(a))
+
     print(a.whatsit)
 

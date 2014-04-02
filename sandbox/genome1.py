@@ -33,4 +33,6 @@ A C G T T G C A T G T  C  G  C  A  T  G  A  T  G  C  A  T  G  A  G  A  G  C  T
 >>>
 >>> si = genome.input.find(s, si+1); si
 20
+>>> si = genome.input.find(s, si+1); si
+-1
 """

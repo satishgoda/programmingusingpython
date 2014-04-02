@@ -1,5 +1,8 @@
 inp = 'ACGTTGCATGTCGCATGATGCATGAGAGCT'
 
 
+fmt = "{:%d} {}" % (len(str(len(input))))
+
 for index, char in enumerate(input):
-    print("{:2} {}".format(index, char))
+    print(fmt.format(index, char))
+

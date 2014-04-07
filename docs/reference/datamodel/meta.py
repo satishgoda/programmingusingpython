@@ -41,8 +41,7 @@ if __name__ == '__main__':
     ati1 = AppType1(**{'id':1, 'type': 'Mesh'})
     ati2 = AppType1(**{'id':2, 'type': 'Mesh'})
     ati3 = AppType1(**{'id':1, 'type': 'Mesh'})
-    
-    
+        
     from pprint import pprint as print
     
     print(vars(ati1))
@@ -51,7 +50,15 @@ if __name__ == '__main__':
 
     time.sleep(2)    
 
-    AppType2 = AppMeta("AppType2", (), {})
+    def __init__(self, id, otype):
+        self.id = id
+        self.otype = otype
+        
+    def __repr__(self):
+        return "<{}.{} object at {}>: {} {}".format(self.__class__.__module__, self.__class__.__qualname__, 
+                                                    hex(id(self)), self.id, self.otype)
+
+    AppType2 = AppMeta("AppType2", (), {'__init__': __init__, '__repr__': __repr__})
     
     print(AppType2)
     
@@ -60,3 +67,6 @@ if __name__ == '__main__':
         if meta_class_objects:
             for name, clsobj in meta_class_objects.items():
                 print("{} was created at {}".format(clsobj, clsobj.toc))
+
+    ati21 = AppType2.__call__(1, 'Light')
+    print(ati21)

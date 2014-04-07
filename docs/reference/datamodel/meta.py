@@ -1,3 +1,4 @@
+
 class AppMeta(type):
     def __new__(cls, name, bases, classdict, *args):
         class_object = type.__new__(cls, name, bases, classdict)
@@ -10,7 +11,7 @@ class AppMeta(type):
 
 class AppType1(metaclass=AppMeta):
     _instances = dict()
-    
+
     def __new__(cls, **kwargs):
         oid = kwargs['id']
         otype = kwargs['type']
@@ -35,8 +36,14 @@ if __name__ == '__main__':
     ati2 = AppType1(**{'id':2, 'type': 'Mesh'})
     ati3 = AppType1(**{'id':1, 'type': 'Mesh'})
     
+    
     from pprint import pprint as print
     
     print(vars(ati1))
     print(vars(ati2))
     print(vars(ati3))
+
+    AppType2 = AppMeta("AppType2", (), {})
+    
+    print(AppType2)
+    

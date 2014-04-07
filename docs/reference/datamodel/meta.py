@@ -1,4 +1,3 @@
-
 class AppMeta(type):
     def __new__(cls, name, bases, classdict, *args):
         class_object = type.__new__(cls, name, bases, classdict)
@@ -11,6 +10,7 @@ class AppMeta(type):
 
 class AppType1(metaclass=AppMeta):
     _instances = dict()
+    
     def __new__(cls, **kwargs):
         oid = kwargs['id']
         otype = kwargs['type']

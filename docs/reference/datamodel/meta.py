@@ -1,12 +1,17 @@
 
+import time
+
 class AppMeta(type):
+    _instances = dict()
     def __new__(cls, name, bases, classdict, *args):
         class_object = type.__new__(cls, name, bases, classdict)
         print("Created class object {} using metaclass {}".format(class_object, cls))
+        cls._instances[name] = class_object
         return class_object
 
     def __init__(cls, name, bases, classdict, *args):
-        print("Initializing class object {}".format(cls))
+        cls.toc = time.asctime()
+        print("Initializing class object {} @ {}".format(cls, cls.toc))
 
 
 class AppType1(metaclass=AppMeta):
@@ -21,6 +26,7 @@ class AppType1(metaclass=AppMeta):
         else:
             instance_object = super(AppType1, cls).__new__(cls)
             cls._instances[name] = instance_object
+            instance_object.__dict__['toc'] = time.asctime()
             print("Created instance object {} using class {}".format(instance_object, cls))
         return instance_object
     
@@ -43,7 +49,14 @@ if __name__ == '__main__':
     print(vars(ati2))
     print(vars(ati3))
 
+    time.sleep(2)    
+
     AppType2 = AppMeta("AppType2", (), {})
     
     print(AppType2)
     
+    for cls in type.__subclasses__(type):
+        meta_class_objects = getattr(cls, '_instances', None)
+        if meta_class_objects:
+            for name, clsobj in meta_class_objects.items():
+                print("{} was created at {}".format(clsobj, clsobj.toc))

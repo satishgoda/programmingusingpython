@@ -9,7 +9,11 @@ class AddClassName(type):
         setattr(cls, cls.__name__, cls.__name__)
 
 
-class Name(metaclass=AddClassName):
+class Base(metaclass=AddClassName):
+    pass
+
+
+class Name(Base):
     pass
 
 
@@ -17,3 +21,4 @@ if __name__ == '__main__':
     print(Name)
     print(vars(Name))
     print(Name.Name)
+    print(vars(Base))

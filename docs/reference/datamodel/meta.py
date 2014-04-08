@@ -3,13 +3,13 @@ import time
 
 class AppMeta(type):
     _instances = dict()
-    def __new__(cls, name, bases, classdict, *args):
+    def __new__(cls, name, bases, classdict):
         class_object = type.__new__(cls, name, bases, classdict)
         print("Created class object {} using metaclass {}".format(class_object, cls))
         cls._instances[name] = class_object
         return class_object
 
-    def __init__(cls, name, bases, classdict, *args):
+    def __init__(cls, name, bases, classdict):
         cls.toc = time.asctime()
         print("Initializing class object {} @ {}".format(cls, cls.toc))
 

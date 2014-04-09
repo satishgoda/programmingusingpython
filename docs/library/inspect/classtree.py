@@ -14,10 +14,8 @@ def trace_bases(iterable):
 
 def trace_tree(iterable):
     for item in iterable:
-        if isinstance(item, tuple):
-            trace_bases(item)
-        else:
-            trace_tree(item)
+        trace = trace_bases if isinstance(item, tuple) else trace_tree
+        trace(item)
 
 
 if __name__ == '__main__':

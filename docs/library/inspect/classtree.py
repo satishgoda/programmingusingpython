@@ -7,9 +7,7 @@ import turtle
 
 def trace_bases(iterable):
     cls_name = iterable[0].__name__
-    bases = []
-    for base in iterable[1]:
-        bases.append(base.__name__)
+    bases =[base.__name__ for base in iterable[1]]
     bases_str = ', '.join(bases) if bases else ''
     print("{0}({1})".format(cls_name, bases_str))
 

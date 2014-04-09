@@ -1,7 +1,7 @@
 About
 -----
 
-A function is usable because it can be called. We can add similar functionality to instances by overloading the __call__ method.
+A function is usable because it can be called. We can add similar functionality to instances by overloading the `__call__` method.
 
 
 References

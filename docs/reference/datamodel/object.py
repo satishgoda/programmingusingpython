@@ -1,10 +1,11 @@
-class Object:
+
+class CustomRepr:
     def __repr__(self):
-        repr = super(A, self).__repr__()
+        repr = object.__repr__(self)
         return repr.replace('<','[').replace('>', ']')
 
 
-class A(Object):
+class A(CustomRepr):
     pass
 
 

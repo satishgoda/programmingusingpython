@@ -13,6 +13,18 @@ inspect Case Study
 >>> import turtle
 
 
+>>> pprint(inspect.getclasstree(turtle.Turtle.mro(), unique=0))
+[(<type 'object'>, ()),
+ [(<class 'turtle.TNavigator'>, (<type 'object'>,)),
+  [(<class 'turtle.RawTurtle'>,
+    (<class 'turtle.TPen'>, <class 'turtle.TNavigator'>)),
+   [(<class 'turtle.Turtle'>, (<class 'turtle.RawTurtle'>,))]],
+  (<class 'turtle.TPen'>, (<type 'object'>,)),
+  [(<class 'turtle.RawTurtle'>,
+    (<class 'turtle.TPen'>, <class 'turtle.TNavigator'>)),
+   [(<class 'turtle.Turtle'>, (<class 'turtle.RawTurtle'>,))]]]]
+
+
 >>> pprint(getclasstree(turtle.Turtle.mro(), unique=1))
 [(<type 'object'>, ()),
  [(<class 'turtle.TNavigator'>, (<type 'object'>,)),

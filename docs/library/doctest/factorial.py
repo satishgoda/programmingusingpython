@@ -50,5 +50,9 @@ def factorial(n):
 
 
 if __name__ == "__main__":
+    import sys
+    sys.argv.append('-v')
+    
     import doctest
     doctest.testmod()
+    

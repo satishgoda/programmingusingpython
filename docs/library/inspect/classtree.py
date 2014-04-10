@@ -4,15 +4,24 @@ from inspect import getmro, getclasstree
 from pprint import pprint
 
 
+ENABLE_DEFAULT = False
+
+_name = lambda cls: cls.__name__
+_qualname = lambda cls: "{0}.{1}".format(cls.__module__, _name(cls))
+
+_which_name = (_name, _qualname)
+
+NAME_FULL = False
+
 def trace(this):
     def _trace_tree(iterable):
         def _trace_bases(iterable):
-            _qualname = lambda cls: "{0}.{1}".format(cls.__module__, cls.__name__)
+            name = _which_name[NAME_FULL]
             derived, bases = iterable
-            cls_name = _qualname(derived)
+            cls_name = name(derived)
             bases_str = ''
             if bases:
-                bases_str = ', '.join([_qualname(base) for base in bases])
+                bases_str = ', '.join([name(base) for base in bases])
             print("{0}({1})".format(cls_name, bases_str))
             
         for item in iterable:
@@ -23,14 +32,27 @@ def trace(this):
     
     tree = getclasstree(mro, unique=1)
     
-    pprint(tree)
-    
+    print('-'*79)
+    print(this)
     print('')
+    
+    if ENABLE_DEFAULT:
+        pprint(tree)
+    
+        print('')
     
     _trace_tree(tree)
 
 
 if __name__ == '__main__':
-    import turtle
+    import sys
     
+    if len(sys.argv) > 1:
+        ENABLE_DEFAULT = eval(sys.argv[1])
+        NAME_FULL = eval(sys.argv[2])
+    
+    import collections
+    trace(collections.MutableSequence)
+
+    import turtle
     trace(turtle.Turtle)

@@ -56,6 +56,9 @@ The result of the above test is ```True```
 
 A module is a collection of attributes of different types. Modules must be imported before we can access the contained attributes.
 
+Modules that we used today: ```math```, ```turtle```, ```math```, ```random```
+
+
 ```import math```
 
 For example, in the ```math``` module, we have
@@ -64,12 +67,18 @@ For example, in the ```math``` module, we have
 
 ```math.sin(radians)``` function attribute
 
+
 The ```turtle``` module contains functionality for visual programming.
 
-```import turtle```
-```turtle.setup(width=600, height=600)```
-```turtle.home()```
-```turtle.forward(100)```
+```python
+import turtle
+
+turtle.setup(width=600, height=600)
+
+turtle.home()
+
+turtle.forward(100)
+```
 
 
 Session Dump

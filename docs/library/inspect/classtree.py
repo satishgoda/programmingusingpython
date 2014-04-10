@@ -7,8 +7,10 @@ from pprint import pprint
 def trace(this):
     def _trace_tree(iterable):
         def _trace_bases(iterable):
-            cls_name = iterable[0].__name__
-            bases =[base.__name__ for base in iterable[1]]
+            _qualname = lambda cls: "{0}.{1}".format(cls.__module__, cls.__name__)
+            derived, bases = iterable
+            cls_name = _qualname(derived)
+            bases = [_qualname(base) for base in bases]
             bases_str = ', '.join(bases) if bases else ''
             print("{0}({1})".format(cls_name, bases_str))
             
@@ -28,6 +30,6 @@ def trace(this):
 
 
 if __name__ == '__main__':
-    import exceptions
+    import turtle
     
-    trace(exceptions.OSError)
+    trace(turtle.Turtle)

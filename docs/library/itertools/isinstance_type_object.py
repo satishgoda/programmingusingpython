@@ -1,14 +1,18 @@
-import itertools
+from itertools import product, starmap
 
 
 iterable = (type, object)
 
 
-for i, t in itertools.product(iterable, repeat=2):
-    names = (x.__name__ for x in (i, t))
+name = lambda c: c.__name__
+onlynames = lambda i, t: map(name, (i, t))
+
+
+for names in starmap(onlynames, product(iterable, repeat=2)):
     code = 'isinstance({:6}, {:6})'.format(*names)
     ret = eval(code)
     print("{} -> {}".format(code, ret))
+
 
 """
 isinstance(type  , type  ) -> True

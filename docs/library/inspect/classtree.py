@@ -19,7 +19,8 @@ def trace_tree(iterable):
 
 
 if __name__ == '__main__':
-    mro = getmro(turtle.Turtle)
+    import exceptions
+    mro = getmro(exceptions.OSError)
     
     tree = getclasstree(mro, unique=1)
     

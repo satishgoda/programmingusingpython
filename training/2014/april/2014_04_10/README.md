@@ -29,6 +29,24 @@ The types of the operands and the operator must be decided before hand for the c
 Builtin types in Python: ```int``` ```float``` ```str``` ```list``` ```dict``` ```set```
 
 
+> __name__ or __variable__
+
+Name is something that points to an value in memory. In Python all values are essentially objects (instances of classes of various types). Two names could point to the same value (refer to the same object).
+
+```python
+>>> a = 10 # 'a' points to an integer object with value 10
+>>> b = 10 # 'b' points to an integer object with value 10
+>>> a is b # Will be True since both a and b will point to the same object with value 10
+True
+>>> hex(id(10))
+'0x13f4260'
+>>> hex(id(a))
+'0x13f4260'
+>>> hex(id(b))
+'0x13f4260'
+```
+
+
 > __immutable type__
 
 Those types whose value cannot be changed once created.

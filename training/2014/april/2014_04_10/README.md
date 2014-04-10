@@ -52,6 +52,22 @@ Checking if ```2**3``` is equal to ```pow(2, 3)```
 The result of the above test is ```True```
 
 
+> __indexing__
+
+Certain types of values (sequence, mapping) support indexing operation that can be used to get access to elements contained within them.
+
+```python
+
+s = "Python"
+
+s[0] == 'P'
+
+s[-1] == 'n'
+```
+
+In the above code snippet, ```s[0]``` accesses the first element in the string and ```s[-1]``` accesses the last element in the string.
+
+
 > __module__
 
 A module is a collection of attributes of different types. Modules must be imported before we can access the contained attributes.

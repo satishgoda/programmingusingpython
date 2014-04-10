@@ -10,3 +10,9 @@ for i, t in itertools.product(iterable, repeat=2):
     ret = eval(code)
     print("{} -> {}".format(code, ret))
 
+"""
+isinstance(type  , type  ) -> True
+isinstance(type  , object) -> True
+isinstance(object, type  ) -> True
+isinstance(object, object) -> True
+"""

@@ -9,13 +9,19 @@ The function of an interpreter is to read expressions, statements, definitions a
 
 
 > __function__
- 
-Examples: ```help``` ```pow```
+
+A function takes inputs, computes values and optionally returns them.
+
+Examples: ```help``` ```pow``` ```dir```
 
 
 > __operation__ and __operators__
 
+Operators are used to perform operations on operands.
+
 Examples: ```+``` ```**```
+
+The types of the operands and the operator must be decided before hand for the computation to be valid.
 
 
 > __type__
@@ -32,7 +38,7 @@ Those types whose value cannot be changed once created.
 Trying to change the first letter of s, ```s[0] = 'T'```, will result in an error.
 
 
-> assignment
+> __assignment__
 
 Example: ```age = 2**3```
 
@@ -44,6 +50,26 @@ Checking if ```2**3``` is equal to ```pow(2, 3)```
 ```2**3``` == ```pow(2, 3)```
 
 The result of the above test is ```True```
+
+
+> __module__
+
+A module is a collection of attributes of different types. Modules must be imported before we can access the contained attributes.
+
+```import math```
+
+For example, in the ```math``` module, we have
+
+```math.pi``` float attribute
+
+```math.sin(radians)``` function attribute
+
+The ```turtle``` module contains functionality for visual programming.
+
+```import turtle```
+```turtle.setup(width=600, height=600)```
+```turtle.home()```
+```turtle.forward(100)```
 
 
 Session Dump

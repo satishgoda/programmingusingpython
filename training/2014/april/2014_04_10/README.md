@@ -1,3 +1,54 @@
+Glossary of terms covered today
+-------------------------------
+
+> __interpreter__
+
+Just type ```python``` to launch the interpreter.
+
+The function of an interpreter is to read expressions, statements, definitions and then evaluate them. The interpreter stops evaluating once it encounters an error.
+
+
+> __function__
+ 
+Examples: ```help``` ```pow```
+
+
+> __operation__ and __operators__
+
+Examples: ```+``` ```**```
+
+
+> __type__
+
+Builtin types in Python: ```int``` ```float``` ```str``` ```list``` ```dict``` ```set```
+
+
+> __immutable type__
+
+Those types whose value cannot be changed once created.
+
+```s = 'the python language'```
+
+Trying to change the first letter of s, ```s[0] = 'T'```, will result in an error.
+
+
+> assignment
+
+Example: ```age = 2**3```
+
+
+> __equality testing__
+
+Checking if ```2**3``` is equal to ```pow(2, 3)``` 
+
+```2**3``` == ```pow(2, 3)```
+
+The result of the above test is ```True```
+
+
+Session Dump
+------------
+The following is a timelapse of the commands that were typed from 11:50 am - 12:23 pm
 ```python
 help
 help()

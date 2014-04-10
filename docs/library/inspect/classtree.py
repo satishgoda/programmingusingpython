@@ -10,8 +10,9 @@ def trace(this):
             _qualname = lambda cls: "{0}.{1}".format(cls.__module__, cls.__name__)
             derived, bases = iterable
             cls_name = _qualname(derived)
-            bases = [_qualname(base) for base in bases]
-            bases_str = ', '.join(bases) if bases else ''
+            bases_str = ''
+            if bases:
+                bases_str = ', '.join([_qualname(base) for base in bases])
             print("{0}({1})".format(cls_name, bases_str))
             
         for item in iterable:

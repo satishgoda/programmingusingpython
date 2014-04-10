@@ -7,3 +7,4 @@
 * Iterator building blocks
 * Core set of fast and memory-efficient tools
 * Form an iterator algebra for constructing specialized tools succintly and efficiently.
+* Work well with the high-speed functions in the operator module.

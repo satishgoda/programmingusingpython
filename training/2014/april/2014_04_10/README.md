@@ -1,5 +1,5 @@
-Glossary of terms covered today
--------------------------------
+Overview of terms and concepts covered today
+--------------------------------------------
 
 > __interpreter__
 

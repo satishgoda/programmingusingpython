@@ -45,26 +45,23 @@ def trace(this):
 
 
 if __name__ == '__main__':
-    try:
-        import sys
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Class Tree using inspect module")
+    
+    parser.add_argument('--default', '-d', action='store_true')
+    parser.add_argument('--qualname', '-q', action='store_true')
+    
+    args = parser.parse_args()
+    
+    
+    ENABLE_DEFAULT, NAME_FULL = args.default, args.qualname
         
-        args = sys.argv[1:3]
-        
-        if args:
-            if len(args) == 1:
-                args.append("False")
-            
-            if not all(map(lambda arg: arg in ("True", "False"), args)):
-                raise Exception("Usage: classtree.py [True [False]]")
+    import collections
+    trace(collections.MutableSequence)
 
-            ENABLE_DEFAULT, NAME_FULL = map(eval, args)
-        
-        import collections
-        trace(collections.MutableSequence)
-
-        import turtle
-        trace(turtle.Turtle)
-    except Exception as e:
-        print(e)
+    import turtle
+    trace(turtle.Turtle)
+    
 
 

@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import argparse
 
 parser = argparse.ArgumentParser(description="Class Tree using inspect module")

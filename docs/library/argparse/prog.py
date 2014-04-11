@@ -9,6 +9,13 @@ parser.add_argument('integers', metavar='N', type=int, nargs='+',
                     help='a sequence of integers for the program to process'
                     )
 
+# optional flag
+parser.add_argument('--sum', dest='accumulate', action='store_const',
+                    const=sum, default=max,
+                    help="sum the integers (default: find the maximum)"
+                    )
+
 args = parser.parse_args()
 
-print(args.integers)
+# Call max or sum (if --sum was specified)
+print(args.accumulate(args.integers))

@@ -17,5 +17,14 @@ parser.add_argument('--sum', dest='accumulate', action='store_const',
 
 args = parser.parse_args()
 
+print(args)
+
 # Call max or sum (if --sum was specified)
 print(args.accumulate(args.integers))
+
+args = parser.parse_args('1 4 7 2'.split())
+
+print(args)
+
+print(args.accumulate(args.integers))
+

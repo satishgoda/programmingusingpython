@@ -45,14 +45,26 @@ def trace(this):
 
 
 if __name__ == '__main__':
-    import sys
-    
-    if len(sys.argv) > 1:
-        ENABLE_DEFAULT = eval(sys.argv[1])
-        NAME_FULL = eval(sys.argv[2])
-    
-    import collections
-    trace(collections.MutableSequence)
+    try:
+        import sys
+        
+        args = sys.argv[1:3]
+        
+        if args:
+            if len(args) == 1:
+                args.append("False")
+            
+            if not all(map(lambda arg: arg in ("True", "False"), args)):
+                raise Exception("Usage: classtree.py [True [False]]")
 
-    import turtle
-    trace(turtle.Turtle)
+            ENABLE_DEFAULT, NAME_FULL = map(eval, args)
+        
+        import collections
+        trace(collections.MutableSequence)
+
+        import turtle
+        trace(turtle.Turtle)
+    except Exception as e:
+        print(e)
+
+

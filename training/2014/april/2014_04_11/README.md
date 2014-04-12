@@ -84,35 +84,86 @@ Session Dump
 ------------
 The following is a timelapse of the commands that were typed from 11:50 am - 12:23 pm
 
+> __Python Philosophy__
+
 ```python
-import this
-import antigravity
-credits
-copyright
-env = globals()
-type(env)
-dir(env)
-env
-import pprint
-pprint.pprint(env)
-pp = pprint.pprint
-pp(env)
-age = 10
-pp(env)
-env.keys()
-env.values()
-'age' in env
-env['age']
-env['age'] = 100
-env['age']
-del age
-env
-s = 'abcde'
-'A' in s
-import os
-os.path.abspath('../')
-env
-del os
+>>> import this
+
+>>> credits
+>>> copyright
+```
+
+
+> __Exercise__
+
+Import the ```antigravity``` module
+
+```python
+>>> import antigravity
+```
+
+> __Interacting with the Python Environment__
+
+variable assignment and module importing are two of the ways to adding entries to the environment
+
+```python
+>>> env = globals()
+
+>>> type(env)
+>>> dir(env)
+
+>>> env
+
+>>> import pprint
+>>> pprint.pprint(env)
+```
+
+Creating an alias for the ```pprint``` function in ```pprint module```
+
+```python
+>>> pp = pprint.pprint
+>>> pp(env)
+>>> pp(env.keys())
+>>> pp(env.values())
+```
+
+Any updates made to the environment will still be accessible from the ```env``` variable
+
+```python
+>>> age = 10
+>>> pp(env)
+
+>>> env['age']
+>>> env['age'] = 100
+>>> env['age']
+>>> del age
+
+>>> env
+```
+
+Testing the membership of objects in a sequence or mapping
+
+```python
+>>> 'age' in env
+
+>>> s = 'abcde'
+>>> 'A' in s
+```
+
+functions can be accessed using the dotted syntax from modules.
+
+```python
+>>> import os
+>>> os.path.abspath('../')
+>>> env
+>>> del os
+```
+
+### Python in action: Turtle tutorial #2
+
+In the following script, we are going to learn about the concepts of functions while using the ```turtle``` module.
+
+```python
 from turtle import *
 setup(600, 600)
 home()

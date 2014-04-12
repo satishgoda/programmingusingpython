@@ -9,6 +9,35 @@ Overview of terms and concepts covered today
 
 Python's builtin functionality incorporates a broad range of concepts and form the foundational building blocks of the language. The builtins and the keywords form the framework upon which we can build scripts, programs, libraries and software frameworks.
 
+> __sequence data types (str, tuple, list)__
+
+Elements (Python objects) stored in a sequence are accessible using the indexing method.
+
+```python
+# string
+>>> name = "Bugs Bunny"
+>>> name[0]
+'B'
+>>> name[-1]
+'y'
+
+# tuple
+>>> name = ("Bugs", "Bunny")
+>>> name[0]
+'Bugs'
+>>> name[-1]
+'Bunny'
+>>> name[1] == name[-1]
+True
+
+# list
+>>> name = ["Bugs", "Bunny"]
+>>> name[0] == 'Bugs'
+True
+>>> name[1][0]
+'B'
+```
+
 > __key value mapping (dictionary)__
 
 Python provides a mapping datatype in which data is stored as key, value pairs.

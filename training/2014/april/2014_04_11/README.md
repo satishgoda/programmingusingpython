@@ -1,16 +1,42 @@
 Overview of terms and concepts covered today
 --------------------------------------------
 
-> __interpreter environment__
-
-```python
->>> globals()
-```
 
 > __Python's builtin functionality__
 
 ```python
 >>> dir(__builtins__)
+```
+
+Python's builtin functionality incorporates a broad range of concepts and form the foundational building blocks of the language. The builtins and the keywords form the framework upon which we can build scripts, programs, libraries and software frameworks.
+
+
+> __key value mapping (dictionary)__
+
+Python provides a mapping datatype in which data is stored as key, value pairs.
+
+```python
+>>> person = dict()
+
+>>> person['first_name'] = 'Bugs'
+>>> person['last_name'] = 'Bunny'
+
+>>> person.keys()
+>>> person.values()
+>>> person.items()
+```
+
+
+> __interpreter environment__
+
+The ```globals()``` builtin function returns the environment state at call time. This function returns data of type dictionary (mapping type.)
+
+```python
+>>> globals()
+
+>>> globals().keys()
+
+>>> globals().values()
 ```
 
 

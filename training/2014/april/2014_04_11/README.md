@@ -48,6 +48,7 @@ What actions populate key, value pairs in the globals() dictionary?
 > __useful modules__
 
 ```pprint``` provides functionality for [pretty printing] (https://docs.python.org/2/library/pprint.html) of data types. 
+```time``` [time facilities] (https://docs.python.org/2/library/time.html)
 
 Session Dump
 ------------

@@ -1,7 +1,6 @@
 Overview of terms and concepts covered today
 --------------------------------------------
 
-
 > __Python's builtin functionality__
 
 ```python
@@ -9,7 +8,6 @@ Overview of terms and concepts covered today
 ```
 
 Python's builtin functionality incorporates a broad range of concepts and form the foundational building blocks of the language. The builtins and the keywords form the framework upon which we can build scripts, programs, libraries and software frameworks.
-
 
 > __key value mapping (dictionary)__
 
@@ -26,7 +24,6 @@ Python provides a mapping datatype in which data is stored as key, value pairs.
 >>> person.items()
 ```
 
-
 > __interpreter environment__
 
 The ```globals()``` builtin function returns the environment state at call time. This function returns data of type dictionary (mapping type.)
@@ -39,6 +36,18 @@ The ```globals()``` builtin function returns the environment state at call time.
 >>> globals().values()
 ```
 
+What actions populate key, value pairs in the globals() dictionary?
+* Assignments statements
+* import statements
+* function definitions
+* class definitions
+* ...
+* ...
+
+
+> __useful modules__
+
+```pprint``` provides functionality for [pretty printing] (https://docs.python.org/2/library/pprint.html) of data types. 
 
 Session Dump
 ------------

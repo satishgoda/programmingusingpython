@@ -49,8 +49,10 @@ if __name__ == '__main__':
     
     parser = argparse.ArgumentParser(description="Class Tree using inspect module")
     
-    parser.add_argument('--default', '-d', action='store_true')
-    parser.add_argument('--qualname', '-q', action='store_true')
+    parser.add_argument('--default', '-d', action='store_true', 
+                        help='print the mro() from inspect')
+    parser.add_argument('--qualname', '-q', action='store_true',
+                        help='print fully qualified class names')
     
     args = parser.parse_args()
     
@@ -62,6 +64,10 @@ if __name__ == '__main__':
 
     import turtle
     trace(turtle.Turtle)
+
+    import numbers
+    trace(numbers.Integral)
     
+    trace(numbers.Rational)
 
 

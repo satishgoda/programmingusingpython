@@ -43,32 +43,54 @@ linux:~> ./myturtles.py
 
 # Object Oriented Programming
 
-In Turtle
+> __In Turtle__
+
 * A Screen contains a list of turtles
 * A Turtle must belong to a screen
 
-Creating objects in Turtle
+> __Creating objects in Turtle__
+
 * Calling the Screen class using ```Screen()``` creates and returns an instance object
 
 ```python
 >>> s = Screen()
+
+>>> s.setup(600, 600)
 ```
 
-* When calling a Class, we can also pass arguments*
+> __When calling a Class, we can also pass arguments__
 
 ```python
 >>> t1 = Turtle("turtle")
+
+>>> t2 = Turtle("triangle")
 ```
+
+> __Some objects contain other objects__
+
+* For example, since all turtles must belong to a screen, the screen object ```s``` keeps track of them. 
+* In order to access the list, we must use the ```turtles()``` method on the ```s```
 
 
 ```python
->>> from turtle import *
->>> dir()
->>> help(exitonclick)
->>> s = Screen()
->>> t1 = Turtle()
->>> help(Turtle)
->>> help(t1)
+>>> s.turtles()
+
+>>> turtles = s.turtles()
+
+>>> turtles[0]
+
+>>> turtles[1]
+```
+
+> __Introspection__
+
+```python
+>>> t1 is turtles[0]
+True
+
+>>> t2 is turtles[1]
+True
+
 >>> t1.__class__
 <'class turtle.Turtle'>
 

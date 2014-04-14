@@ -1,5 +1,14 @@
 # About
 
+> __Class__
+
+A ```class``` is a template which encapsulates the data and operations that uniquely sets it apart and using which ```instance```s can be manufactured on demand.
+
+
+> __Instance__
+
+An ```instance``` is created from a ```class``` and holds the data that differentiates it from its siblings (other instances that were created using their ```class```). When operations are called on an instance, the instance data is modified, but essentially the logic in the operation is the same for all instances. 
+
 
 # Python Script
 ```python

@@ -1,4 +1,3 @@
-
 class CustomRepr:
     def __repr__(self):
         repr = object.__repr__(self)

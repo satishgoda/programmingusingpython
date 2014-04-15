@@ -1,5 +1,4 @@
 
-
 class AddClassName(type):
     def __new__(cls, name, bases, classdict):
         class_object = type.__new__(cls, name, bases, classdict)

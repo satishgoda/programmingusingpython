@@ -2,7 +2,9 @@
 
 > __ipython__
 
-```ipython``` is an interactive Python interpreter. It enables you to query the documentation and source code for various objects in a very user-friendly manner.
+* ```ipython``` is an interactive Python interpreter. It enables you to query the documentation and source code for various objects in a very user-friendly manner.
+
+* There is also a smart history mode, wherein code blocks (like for loops) can be re-edited.
 
 
 # Coding Examples
@@ -11,11 +13,12 @@
 
 ```python
 >>> "{0} {1}".format("bugs", "bunny")
-"bugs bunny"
+"bugs bunny" 
 
 >>> "{1} {0}".format("bugs", "bunny")
 "bunny bugs"
 ```
+
 
 ## String manipulation
 
@@ -47,6 +50,39 @@
 "one, two, three"
 
 ```
+
+## Opening and Reading Files on Disk
+
+```python
+
+f = open('text.txt')
+
+lines = f.readlines()
+
+f.close()
+
+
+for line in lines:
+    print line
+
+
+for index, line in enumerate(lines):
+    print("{0}) {1}".format(index, line))
+
+
+for index, line in enumerate(lines, start=1):
+    if len(line.strip()) > 0:
+        print("{0}) {1}".format(index, line))
+
+
+line_count = len(lines)
+
+
+for index, line in enumerate(reversed(lines), start=1):
+    if len(line.strip()) > 0:
+        print("{0}) {1}".format(line_count - index + 1, line))
+```
+
 
 # Summary
 

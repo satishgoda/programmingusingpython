@@ -13,3 +13,9 @@
 * Funcation composition f(g(h(input)))
 * ```for-in-lines```, ```if len(line.strip()) > 0```
 * ```enumerate``` and ```reversed```
+* Checkout
+* http://pythontutor.com
+* https://docs.python.org
+* http://pyth0n.org
+
+# Refe

@@ -1,4 +1,11 @@
-> braindump
+# Overview of terms and concepts covered today
+
+> __ipython__
+
+```ipython``` is an interactive Python interpreter. It enables you to query the documentation and source code for various objects in a very user-friendly manner.
+
+
+# Summary
 
 * ```ipython```
 * everything is an object, including ```str```, ``file```
@@ -14,7 +21,7 @@
 * ```for-in-lines```, ```if len(line.strip()) > 0```
 * ```enumerate``` and ```reversed```
 
-> Checkout
+# Checkout
 
 * http://ipython.org
 * http://pythontutor.com

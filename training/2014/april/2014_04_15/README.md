@@ -5,6 +5,49 @@
 ```ipython``` is an interactive Python interpreter. It enables you to query the documentation and source code for various objects in a very user-friendly manner.
 
 
+# Coding Examples
+
+## String formatting
+
+```python
+>>> "{0} {1}".format("bugs", "bunny")
+"bugs bunny"
+
+>>> "{1} {0}".format("bugs", "bunny")
+"bunny bugs"
+```
+
+## String manipulation
+
+```python
+>>> s = "   one two three   "
+
+>>> s.strip()
+"one two three"
+
+>>> s.split()
+["one", "two", "three"]
+
+>>> words = s.split()
+
+>>> words[0], words[2]
+
+>>> for word in words:
+...     print("Word is {0}".format(word))
+...
+"one"
+"two"
+"three"
+
+>>> separator = ", "
+
+>>> js = separator.join(words)
+
+>>> js
+"one, two, three"
+
+```
+
 # Summary
 
 * ```ipython```

@@ -1,4 +1,3 @@
-
 import time
 
 class AppMeta(type):

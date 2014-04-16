@@ -5,7 +5,14 @@ import os
 import itertools
 
 class BlenderStartupError(Exception):
-    pass
+    def __init__(self, *args):
+        super(BlenderStartupError, self).__init__(*args)
+    
+    def message(self):
+        content, args = self.args
+        print("{0}: {1}".format(self.__class__.__name__, content))
+        for directory in args:
+            print("\t{0}".format(directory))
 
 
 _required_directories = ('./config', './scripts')
@@ -17,11 +24,7 @@ try:
                                             _required_directories
                                   )
 except BlenderStartupError as e:
-    message, args = e.args
-    print("{0}: {1}".format(e.__class__.__name__, message))
-    for directory in args:
-        print("\t{0}".format(directory))
-
+    e.message()
     import sys
     sys.exit(1)
 else:

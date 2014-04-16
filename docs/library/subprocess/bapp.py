@@ -13,9 +13,11 @@ _required_directories = ('./config', './scripts')
 
 try:
     if not all(itertools.imap(os.path.exists, _required_directories)):
-        raise RequiredBlenderStartupError("Mwhahahha")
+        raise RequiredBlenderStartupError(_required_directories)
 except RequiredBlenderStartupError as e:
+    print("The following directories do not exist")
     print(e)
+
     import sys
     sys.exit(1)
 else:

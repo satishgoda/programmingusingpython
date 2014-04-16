@@ -7,6 +7,7 @@ import itertools
 import shutil
 
 
+
 class BlenderStartupError(Exception):
     def __init__(self, *args):
         super(BlenderStartupError, self).__init__(*args)
@@ -21,9 +22,19 @@ class BlenderStartupError(Exception):
 _program = sys.argv[0]
 _program_child = "blender"
 _required_directories = ('./config', './scripts')
+_custom_modules = '/home/satishg/blender/apps/modules'
+
+
+sys.path.insert(0, _custom_modules)
 
 
 try:
+    import bargs
+    
+    p = bargs.ProgramDetails()
+    
+    print(p.launcher)
+    
     try:
         if not all(itertools.imap(os.path.exists, _required_directories)):
             raise BlenderStartupError("The following directories do not exist",
@@ -36,7 +47,7 @@ try:
         env = os.environ.copy()
         env['BLENDER_USER_CONFIG'] = _required_directories[0] 
         env['BLENDER_USER_SCRIPTS'] = _required_directories[1]
-        env['PYTHONPATH'] = '/home/satishg/blender/apps/modules'
+        env['PYTHONPATH'] = _custom_modules
         
         p = Popen(_program_child, env=env)
 

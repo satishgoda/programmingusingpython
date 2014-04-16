@@ -2,6 +2,7 @@
 
 from subprocess  import Popen
 import os
+import sys
 import itertools
 
 class BlenderStartupError(Exception):
@@ -17,31 +18,34 @@ class BlenderStartupError(Exception):
 
 _required_directories = ('./config', './scripts')
 
-
 try:
-    if not all(itertools.imap(os.path.exists, _required_directories)):
-        raise BlenderStartupError("The following directories do not exist",
-                                            _required_directories
-                                  )
-except BlenderStartupError as e:
-    e.message()
-    import sys
-    sys.exit(1)
-else:
-    p = Popen("blender", env={
-                    'BLENDER_USER_CONFIG': _required_directories[0], 
-                    'BLENDER_USER_SCRIPTS' : _required_directories[1], 
-                    'DISPLAY': ':0',
-                    'PYTHONPATH': '',
-                    'PATH': '/home/satishg/bin/blenderinstalldir/'
-                })
+    try:
+        if not all(itertools.imap(os.path.exists, _required_directories)):
+            raise BlenderStartupError("The following directories do not exist",
+                                                _required_directories
+                                    )
+    except BlenderStartupError as e:
+        e.message()
+        sys.exit(1)
+    else:
+        p = Popen("blender", env={
+                        'BLENDER_USER_CONFIG': _required_directories[0], 
+                        'BLENDER_USER_SCRIPTS' : _required_directories[1], 
+                        'DISPLAY': ':0',
+                        'PYTHONPATH': '',
+                        'PATH': '/home/satishg/bin/blenderinstalldir/'
+                    })
 
 
-    print("Parent {0} launched child {1}".format(os.getpid(), p.pid))
+        print("Parent {0} launched child {1}".format(os.getpid(), p.pid))
 
-    retcode = p.wait()
+        retcode = p.wait()
 
-    print("Child process {0} terminited with retcode {1}".format(p.pid, retcode))
-finally:
-    print "Bye bye"
-
+        print("Child process {0} terminited with retcode {1}".format(p.pid, retcode))
+       
+        sys.exit(0)
+    finally:
+        print "Bye bye"
+except SystemExit as e:
+    print('The program "{0}" exited with retcode {1}'.format(sys.argv[0], e.args[0]))
+    

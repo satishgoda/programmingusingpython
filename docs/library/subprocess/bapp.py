@@ -4,7 +4,7 @@ from subprocess  import Popen
 import os
 import itertools
 
-class RequiredBlenderStartupError(Exception):
+class BlenderStartupError(Exception):
     pass
 
 
@@ -13,10 +13,14 @@ _required_directories = ('./config', './scripts')
 
 try:
     if not all(itertools.imap(os.path.exists, _required_directories)):
-        raise RequiredBlenderStartupError(_required_directories)
-except RequiredBlenderStartupError as e:
-    print("The following directories do not exist")
-    print(e)
+        raise BlenderStartupError("The following directories do not exist",
+                                            _required_directories
+                                  )
+except BlenderStartupError as e:
+    message, args = e.args
+    print("{0}: {1}".format(e.__class__.__name__, message))
+    for directory in args:
+        print("\t{0}".format(directory))
 
     import sys
     sys.exit(1)

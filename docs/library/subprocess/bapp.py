@@ -4,8 +4,6 @@ from subprocess  import Popen
 import os
 import sys
 import itertools
-import shutil
-
 
 
 class BlenderStartupError(Exception):
@@ -49,7 +47,12 @@ try:
         env['BLENDER_USER_SCRIPTS'] = _required_directories[1]
         env['PYTHONPATH'] = _custom_modules
         
-        p = Popen(_program_child, env=env)
+        program_args = [_program_child]
+        
+        if os.path.exists('./boot.py'):
+            program_args.extend('--python boot.py'.split())
+        
+        p = Popen(program_args, env=env)
 
         print("Parent {0} with pid {1} launched child with pid {2}".format(_program, os.getpid(), p.pid))
 

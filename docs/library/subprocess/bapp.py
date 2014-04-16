@@ -4,6 +4,8 @@ from subprocess  import Popen
 import os
 import sys
 import itertools
+import shutil
+
 
 class BlenderStartupError(Exception):
     def __init__(self, *args):
@@ -16,7 +18,14 @@ class BlenderStartupError(Exception):
             print("\t{0}".format(directory))
 
 
+def _program_details(program):
+    shutil.abspath()
+
+
+_program = sys.argv[0]
+_program_child = "blender"
 _required_directories = ('./config', './scripts')
+
 
 try:
     try:
@@ -28,16 +37,14 @@ try:
         e.message()
         sys.exit(1)
     else:
-        p = Popen("blender", env={
-                        'BLENDER_USER_CONFIG': _required_directories[0], 
-                        'BLENDER_USER_SCRIPTS' : _required_directories[1], 
-                        'DISPLAY': ':0',
-                        'PYTHONPATH': '',
-                        'PATH': '/home/satishg/bin/blenderinstalldir/'
-                    })
+        env = os.environ.copy()
+        env['BLENDER_USER_CONFIG'] = _required_directories[0] 
+        env['BLENDER_USER_SCRIPTS'] = _required_directories[1]
+        env['PYTHONPATH'] = '/home/satishg/blender/apps/modules'
+        
+        p = Popen(_program_child, env=env)
 
-
-        print("Parent {0} launched child {1}".format(os.getpid(), p.pid))
+        print("Parent {0} with pid {1} launched child with pid {2}".format(_program, os.getpid(), p.pid))
 
         retcode = p.wait()
 
@@ -47,5 +54,5 @@ try:
     finally:
         print "Bye bye"
 except SystemExit as e:
-    print('The program "{0}" exited with retcode {1}'.format(sys.argv[0], e.args[0]))
+    print('The program "{0}" exited with retcode {1}'.format(_program, e.args[0]))
     

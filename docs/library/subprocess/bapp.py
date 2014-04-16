@@ -18,10 +18,6 @@ class BlenderStartupError(Exception):
             print("\t{0}".format(directory))
 
 
-def _program_details(program):
-    shutil.abspath()
-
-
 _program = sys.argv[0]
 _program_child = "blender"
 _required_directories = ('./config', './scripts')

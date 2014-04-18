@@ -7,3 +7,7 @@ IPython provides a rich architecture for interactive computing with:
 * Support for interactive data visualization and use of GUI toolkits.
 * Flexible, embeddable interpreters to load into your own projects.
 * Easy to use, high performance tools for parallel computing.
+
+# Videos
+
+* [IPython: Python at your fingertips] (https://www.youtube.com/watch?v=26wgEsg9Mcc)

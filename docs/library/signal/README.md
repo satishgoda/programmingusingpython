@@ -3,6 +3,14 @@
 * https://docs.python.org/3.3/library/signal.html
 * https://docs.python.org/2.7/library/signal.html
 
+# Signals in *nix
+
+```bash
+linux:~> kill -INT pid
+
+linux:~> kill -2 pid
+```
+
 # Reading
 
 * [Linux and Signals] (http://www.computerhope.com/unix/signals.htm)

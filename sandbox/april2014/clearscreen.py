@@ -9,13 +9,8 @@ if __name__ == '__main__':
         while True:
             try:
                 p = raw_input("Enter some name> ")
-            except Exception as e:
-                if isinstance(e, KeyboardInterrupt):
-                    print('\n')
-                    import sys
-                    sys.exit(1)
-                elif isinstance(e, EOFError):
-                    print('^D')
+            except EOFError as eof:
+                print('^D')
             else:
                 if p.lower() in ('clear', 'cls'):
                     os.system('clear')

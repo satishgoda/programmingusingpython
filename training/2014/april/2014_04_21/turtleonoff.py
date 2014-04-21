@@ -9,11 +9,10 @@ class ToggleTurtle(turtle.Turtle):
         self.clicked = False
         self.onclick(self.handleClick)
 
-    def handleClick(self, x, y):
-        if self.clicked:
-            self.color('red')
-        else:
-            self.color('green')
+    def handleClick(self, x, y):     
+        color = 'red' if self.clicked else 'green'
+
+        self.color(color)
 
         self.clicked = not self.clicked
 

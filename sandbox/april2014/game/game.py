@@ -8,6 +8,7 @@ assert __name__ == '__main__', "One does not simply import a game. One needs to 
 
 input = raw_input
 
+
 class Application(object):
     def __init__(self, name):
         self.name = name
@@ -35,16 +36,23 @@ class Application(object):
             else:
                 self.actions[command]()
 
+    def view(self):
+        print("Welcome to this application")
+
     def execute(self):
         os.system('clear')
         while True:
             self.menu()
+            print('-'*79)
+            self.view()
+            print('-'*79)
             self.user_interaction()
             print('-'*79)
             os.system('clear')
 
     def handle_signal_SIGINT(self, signal, frame):
         raise KeyboardInterrupt(self)
+
 
 if __name__ == '__main__':
     app = Application("Test")

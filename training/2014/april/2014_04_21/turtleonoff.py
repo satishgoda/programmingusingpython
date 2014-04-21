@@ -12,10 +12,10 @@ class ToggleTurtle(turtle.Turtle):
     def handleClick(self, x, y):
         if self.clicked:
             self.color('red')
-            self.clicked = False
         else:
             self.color('green')
-            self.clicked = True
+
+        self.clicked = not self.clicked
 
 
 if __name__ == '__main__':
@@ -29,4 +29,3 @@ if __name__ == '__main__':
     turtle2.bk(100)
 
     raw_input("Press any key to exit")
-

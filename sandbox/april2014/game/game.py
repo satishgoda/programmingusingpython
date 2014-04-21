@@ -11,7 +11,8 @@ input = raw_input
 
 class ApplicationMode(object):
     def __init__(self, label, *args):
-        app.modes['list'][label] = self
+        self.app = args[0]
+        self.app.modes['list'][label] = self
 
 
 class ApplicationHelpMode(ApplicationMode):
@@ -25,6 +26,15 @@ class ApplicationHelpMode(ApplicationMode):
         pass
 
 
+class ApplicationQuitMode(ApplicationMode):
+    def __init__(self, *args):
+        super(ApplicationQuitMode, self).__init__("Quit", *args)
+
+    def user_interaction(self):
+        print("{0} application {1}".format("Quitting", self.app.name))
+        sys.exit(0)
+
+
 class Application(object):
     def __init__(self, name):
         self.name = name
@@ -34,21 +44,18 @@ class Application(object):
         self.modes['current'] = 'app'
         self.modes['list'] = {}
 
-        self.actions = {}
-        self.actions['Quit'] = self.action_quit
-
-    def action_quit(self):
-        print("{0} application {1}".format("Quitting", self.name))
-        sys.exit(0)
-
     def menu(self):
         menuText = ["{0} # ".format(self.name)]
 
-        if self.modes['current'] == 'app':
-            modes = self.modes['list']
-            others = ' | '.join(modes.keys()+['Quit'])
-            menuText.append(others)
+        mode = self.modes['current']
 
+        if  mode == 'app':
+            modes = self.modes['list']
+            others = ' | '.join(modes.keys())
+            menuText.append(others)
+        else:
+            next = self.modes['list'][mode]
+            menuText = next.menu()
         print(''.join(menuText))
 
     def user_interaction(self):
@@ -59,14 +66,17 @@ class Application(object):
                 return
             if not command: return
 
-            if command not in self.actions:
+            mode = self.modes['list'].get(command, None)
+            if not mode:
                 pass
             else:
-                self.actions[command]()
+                mode.user_interaction()
 
     def view(self):
-        if self.modes['current'] == 'app':
+        mode = self.modes['current']
+        if mode == 'app':
             print("Welcome to this application")
+
 
     def execute(self):
         os.system('clear')
@@ -83,11 +93,11 @@ class Application(object):
         raise KeyboardInterrupt(self)
 
 
-
 if __name__ == '__main__':
     app = Application("Test")
 
     ApplicationHelpMode(app)
+    ApplicationQuitMode(app)
 
     signal.signal(signal.SIGINT, app.handle_signal_SIGINT)
 

@@ -51,3 +51,8 @@ Out[4]: 'Earth'
 def handleClick(self, x, y)  => turtle1.handleClick(x, y) => ToggleTurtle.handleClick(turtle1, x, y)
 
 The handleClick mrthod that we defined in ToggleTurtle class is called by the "screen" on the instance of the turtle that we clicked on. It is the "screen" that also passes the x, y coordinates to the handleClick method
+
+# Development Environment
+## Kate
+* https://pypi.python.org/pypi/Kate-plugins
+* http://kate-editor.org/2012/06/26/python-plugin-user-guide/

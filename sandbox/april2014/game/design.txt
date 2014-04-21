@@ -1,0 +1,19 @@
+Player launches game application
+
+
+Setup of various application modes takes place
+    Help mode       - display help
+    User mode       - user settings
+    Game mode       - the actual game
+    Results mode    - display result of the game
+
+
+Setup the initial "Context"
+    Application mode table
+    Mode to display (Application menu)
+    Previous mode (Nothing by default)
+
+
+Application starts
+    Context is set
+    Draw/Event loop

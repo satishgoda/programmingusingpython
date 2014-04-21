@@ -2,13 +2,11 @@
 
 import sys
 import os
-
+import signal
 
 assert __name__ == '__main__', "One does not simply import a game. One needs to run it"
 
-# Python 3.x compatibility
 input = raw_input
-
 
 class Application(object):
     def __init__(self, name):
@@ -45,8 +43,16 @@ class Application(object):
             print('-'*79)
             os.system('clear')
 
+    def handle_signal_SIGINT(self, signal, frame):
+        raise KeyboardInterrupt(self)
 
 if __name__ == '__main__':
     app = Application("Test")
 
-    app.execute()
+    signal.signal(signal.SIGINT, app.handle_signal_SIGINT)
+
+    try:
+        app.execute()
+    except KeyboardInterrupt as e:
+        print("\nApplication {0} exiting..".format(e.args[0].name))
+

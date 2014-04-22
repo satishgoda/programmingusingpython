@@ -57,8 +57,8 @@ class MainMode(Mode):
 
 class Context(object):
 
-    def __call__(self):
-        return self.parent, self.mode
+    def update(self, next):
+        self.parent, self.mode = self.mode, self.modes[next]
 
 
 class InteractionHandler(object):
@@ -96,9 +96,7 @@ class InteractionHandler(object):
             if mode.modes:
                 modes.extend(mode.modes)
             if result in [mode.name for mode in modes]:
-                current = context.mode
-                context.parent = current
-                context.mode = context.modes[result]
+                context.update(result)
             else:
                 pass
 

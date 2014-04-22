@@ -9,11 +9,20 @@ from pprint import pprint as pp
 input = raw_input
 
 class Mode(object):
-    name = None
-    modes = None
+
+    def __init__(self):
+        self.modes = list()
+
+    def menu(self): return self.modes
 
     def __call__(self, *args, **kwargs):
         return self.menu, self.view
+
+    def is_top_level(self):
+        return False
+
+    def has_sub_modes(self):
+        return len(self.modes)
 
     def menu(self):
         return [mode.name for mode in self.modes]
@@ -25,9 +34,6 @@ class QuitMode(Mode):
     def __init__(self):
         super(QuitMode, self).__init__()
         self.name = "Quit"
-        self.modes = None
-
-    def menu(self): return []
 
     def view(self):
         print('Do you really want to Exit? (y/n)')
@@ -37,9 +43,6 @@ class HelpMode(Mode):
     def __init__(self):
         super(HelpMode, self).__init__()
         self.name = "Help"
-        self.modes = None
-
-    def menu(self): return []
 
     def view(self):
         print('This is how you use this application')
@@ -49,7 +52,6 @@ class GameMode(Mode):
     def __init__(self):
         super(GameMode, self).__init__()
         self.name = "Game"
-        self.modes = None
 
     def view(self):
         print('Let us play this game')
@@ -60,6 +62,9 @@ class MainMode(Mode):
         super(MainMode, self).__init__()
         self.name = "Main"
         self.modes = None
+
+    def is_top_level(self):
+        return True
 
     def view(self):
         print('Welcome to the application')
@@ -96,10 +101,15 @@ class InteractionHandler(object):
 
     def menu(self):
         context = self.context
+        parent, mode = context.parent, context.mode
+
         menuText = ['{0} //'.format(context.appName)]
-        if not context.mode.name == 'Main' and context.parent:
-            menuText.append(context.parent.name)
-        menuText.extend(context.mode.menu())
+
+        if not mode.is_top_level() and parent:
+            menuText.append(parent.name)
+
+        menuText.extend(mode.menu())
+
         print(' | '.join(menuText))
 
     def view(self):

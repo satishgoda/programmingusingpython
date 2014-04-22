@@ -4,6 +4,8 @@ import os
 import signal
 import argparse
 
+from pprint import pprint as pp
+
 input = raw_input
 
 class Mode(object):
@@ -23,16 +25,18 @@ class QuitMode(Mode):
     def __init__(self):
         super(QuitMode, self).__init__()
         self.name = "Quit"
+        self.modes = None
 
-    def menu(self): pass
+    def menu(self): return []
 
 
 class HelpMode(Mode):
     def __init__(self):
         super(HelpMode, self).__init__()
         self.name = "Help"
+        self.modes = None
 
-    def menu(self): pass
+    def menu(self): return []
 
     def view(self):
         print('This is how you use this application')
@@ -42,6 +46,7 @@ class MainMode(Mode):
     def __init__(self):
         super(MainMode, self).__init__()
         self.name = "Main"
+        self.modes = None
 
     def view(self):
         print('Welcome to the application')
@@ -71,22 +76,37 @@ class InteractionHandler(object):
 
     def interact(self):
         try:
-            user_typed = input(">>> ")
+            user_typed = input(">>> ").lower().capitalize()
         except EOFError as eofe:
             return None
         else:
             return user_typed
 
+    def update(self, result):
+        if result:
+            context = self.context
+            parent = context.parent
+            mode = context.mode
+            modes = []
+            if parent:
+                modes.append(parent)
+            if mode.modes:
+                modes.extend(mode.modes)
+            if result in [mode.name for mode in modes]:
+                current = context.mode
+                context.parent = current
+                context.mode = context.modes[result]
+            else:
+                pass
+
     def __call__(self):
         os.system('clear')
+
         while True:
             self.menu()
             self.view()
-            result = self.interact()
-            if result:
-                pass
-            else:
-                pass
+            self.update(self.interact())
+
             if not self.context.args.debug:
                 os.system('clear')
 

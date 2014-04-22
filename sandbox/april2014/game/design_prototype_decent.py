@@ -45,6 +45,16 @@ class HelpMode(Mode):
         print('This is how you use this application')
 
 
+class GameMode(Mode):
+    def __init__(self):
+        super(GameMode, self).__init__()
+        self.name = "Game"
+        self.modes = None
+
+    def view(self):
+        print('Let us play this game')
+
+
 class MainMode(Mode):
     def __init__(self):
         super(MainMode, self).__init__()
@@ -128,8 +138,12 @@ if __name__ == '__main__':
     help = HelpMode()
     modes[help.name] = help
 
+    game = GameMode()
+    modes[game.name] = game
+    game.modes = [help]
+
     main = MainMode()
-    main.modes = [help, quit]
+    main.modes = [game, help, quit]
     modes[main.name] = main
 
     context = Context()

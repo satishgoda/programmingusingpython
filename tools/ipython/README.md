@@ -11,3 +11,7 @@ IPython provides a rich architecture for interactive computing with:
 # Videos
 
 * [IPython: Python at your fingertips] (https://www.youtube.com/watch?v=26wgEsg9Mcc)
+
+# Related
+
+* https://pypi.python.org/pypi/ipython

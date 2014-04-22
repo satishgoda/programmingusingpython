@@ -73,7 +73,10 @@ class MainMode(Mode):
 class Context(object):
 
     def update(self, next):
-        self.parent, self.mode = self.mode, self.modes[next]
+        if not self.mode.has_sub_modes():
+            self.parent, self.mode = self.mode, self.modes[next]
+        else:
+            pass
 
 
 class InteractionHandler(object):

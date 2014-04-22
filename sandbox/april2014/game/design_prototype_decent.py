@@ -29,6 +29,9 @@ class QuitMode(Mode):
 
     def menu(self): return []
 
+    def view(self):
+        print('Do you really want to Exit? (y/n)')
+
 
 class HelpMode(Mode):
     def __init__(self):
@@ -66,7 +69,7 @@ class InteractionHandler(object):
     def menu(self):
         context = self.context
         menuText = ['{0} //'.format(context.appName)]
-        if context.parent:
+        if not context.mode.name == 'Main' and context.parent:
             menuText.append(context.parent.name)
         menuText.extend(context.mode.menu())
         print(' | '.join(menuText))

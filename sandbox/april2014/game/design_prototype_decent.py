@@ -12,6 +12,7 @@ class Mode(object):
 
     def __init__(self):
         self.modes = list()
+        self.parent = None
 
     def menu(self): return self.modes
 
@@ -73,10 +74,16 @@ class MainMode(Mode):
 class Context(object):
 
     def update(self, next):
-        if not self.mode.has_sub_modes():
-            self.parent, self.mode = self.mode, self.modes[next]
+        next = self.modes[next]
+        
+        current = self.mode
+        
+        if next.name == current.parent.name:
+            current.parent = None
         else:
-            pass
+            next.parent = current
+
+        self.mode = next
 
 
 class InteractionHandler(object):
@@ -87,9 +94,8 @@ class InteractionHandler(object):
 
     def updateModes(self):
         context = self.context
-
-        parent = context.parent
         mode = context.mode
+        parent = mode.parent
 
         self.modes = []
 
@@ -104,12 +110,12 @@ class InteractionHandler(object):
 
     def menu(self):
         context = self.context
-        parent, mode = context.parent, context.mode
+        mode = context.mode
 
         menuText = ['{0} //'.format(context.appName)]
 
-        if not mode.is_top_level() and parent:
-            menuText.append(parent.name)
+        if not mode.is_top_level() and mode.parent:
+            menuText.append(mode.parent.name)
 
         menuText.extend(mode.menu())
 
@@ -173,7 +179,6 @@ if __name__ == '__main__':
     context = Context()
     context.appName = 'Test'
     context.modes = modes
-    context.parent = None
     context.mode = main
     context.args = args
 

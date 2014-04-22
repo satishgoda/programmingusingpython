@@ -75,6 +75,18 @@ class InteractionHandler(object):
 
     def __init__(self, context):
         self.context = context
+        self.updateModes()
+
+    def updateModes(self):
+        context = self.context
+
+        parent = context.parent
+        mode = context.mode
+        self.modes = []
+        if parent:
+            self.modes.append(parent)
+        if mode.modes:
+            self.modes.extend(mode.modes)
 
     def menu(self):
         context = self.context
@@ -89,24 +101,18 @@ class InteractionHandler(object):
 
     def interact(self):
         try:
-            user_typed = input(">>> ").lower().capitalize()
+            what_user_typed = input(">>> ").lower().capitalize()
         except EOFError as eofe:
             return None
         else:
-            return user_typed
+            return what_user_typed
 
     def update(self, result):
         if result:
             context = self.context
-            parent = context.parent
-            mode = context.mode
-            modes = []
-            if parent:
-                modes.append(parent)
-            if mode.modes:
-                modes.extend(mode.modes)
-            if result in [mode.name for mode in modes]:
+            if result in [mode.name for mode in self.modes]:
                 context.update(result)
+                self.updateModes()
             else:
                 pass
 

@@ -4,9 +4,10 @@ import os
 import signal
 import argparse
 
-from pprint import pprint as pp
 
+# Python 3 compatibility
 input = raw_input
+
 
 class Mode(object):
 
@@ -75,12 +76,12 @@ class MainMode(Mode):
 
 class Context(object):
 
-    def update(self, next):
-        next = self.modes[next]
+    def update(self, what_user_typed):
+        next = self.modes[what_user_typed]
 
         current = self.mode
 
-        if next.is_top_level or current.parent is next:
+        if next.is_top_level or (current.parent is next):
             current.parent = None
         elif next in current.modes:
             next.parent = current
@@ -138,7 +139,7 @@ class InteractionHandler(object):
         self.context.update(result)
         self.updateModes()
 
-    def __call__(self):
+    def mainloop(self):
         os.system('clear')
 
         while True:
@@ -152,6 +153,16 @@ class InteractionHandler(object):
 
             if not self.context.args.debug:
                 os.system('clear')
+
+    def handle_SIGINT(self, signal, frame):
+        mode = self.context.mode
+
+        if mode.is_top_level:
+            raise KeyboardInterrupt
+        else:
+            print('CTRL+C')
+            print('WARNING: Cannot quit in this mode "{0}"'.format(mode.name))
+            raise EOFError
 
 
 if __name__ == '__main__':
@@ -184,7 +195,11 @@ if __name__ == '__main__':
     context.mode = main
     context.args = args
 
+    application = InteractionHandler(context)
+
+    signal.signal(signal.SIGINT, application.handle_SIGINT)
+
     try:
-        InteractionHandler(context)()
+        application.mainloop()
     except KeyboardInterrupt as e:
         print('Bye bye')

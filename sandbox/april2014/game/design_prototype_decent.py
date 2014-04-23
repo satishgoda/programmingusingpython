@@ -19,6 +19,7 @@ class Mode(object):
     def __call__(self, *args, **kwargs):
         return self.menu, self.view
 
+    @property
     def is_top_level(self):
         return False
 
@@ -64,6 +65,7 @@ class MainMode(Mode):
         self.name = "Main"
         self.modes = None
 
+    @property
     def is_top_level(self):
         return True
 
@@ -75,12 +77,12 @@ class Context(object):
 
     def update(self, next):
         next = self.modes[next]
-        
+
         current = self.mode
-        
-        if next.name == current.parent.name:
+
+        if next.is_top_level or current.parent is next:
             current.parent = None
-        else:
+        elif next in current.modes:
             next.parent = current
 
         self.mode = next
@@ -114,7 +116,7 @@ class InteractionHandler(object):
 
         menuText = ['{0} //'.format(context.appName)]
 
-        if not mode.is_top_level() and mode.parent:
+        if (not mode.is_top_level) and mode.parent:
             menuText.append(mode.parent.name)
 
         menuText.extend(mode.menu())

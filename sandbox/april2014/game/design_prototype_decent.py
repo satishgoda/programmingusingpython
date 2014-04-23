@@ -53,6 +53,20 @@ class QuitMode(Mode):
     def view(self):
         print('Do you really want to Exit? (y/n)')
 
+    def interact(self, context):
+        try:
+            what_user_typed = input(">>> ").strip()
+        except EOFError as eofe:
+            return None
+        else:
+            if what_user_typed and what_user_typed.lower().startswith('y'):
+                import sys
+                sys.exit(0)
+            else:
+                current = context.mode
+                context.mode = current.parent
+                current.remove_parent()
+                return True 
 
 class HelpMode(Mode):
     def __init__(self):
@@ -107,6 +121,9 @@ class InteractionHandler(object):
     def valid_mode(self, what_user_typed):
         return what_user_typed in self.context.mode.menu
 
+    def update(self, result):
+        self.context.update(result)
+
     def menu(self):
         context = self.context
 
@@ -125,9 +142,6 @@ class InteractionHandler(object):
         else:
             return what_user_typed and what_user_typed.lower().capitalize()
 
-    def update(self, result):
-        self.context.update(result)
-
     def mainloop(self):
         os.system('clear')
 
@@ -135,10 +149,18 @@ class InteractionHandler(object):
             self.menu()
             self.view()
 
-            what_user_typed = self.interact()
+            mode_interact = getattr(self.context.mode, 'interact', None)
 
-            if what_user_typed and self.valid_mode(what_user_typed):
-                self.update(what_user_typed)
+            result = False
+
+            if mode_interact:
+                result = mode_interact(context)
+
+            if not result:
+                what_user_typed = self.interact()
+
+                if what_user_typed and self.valid_mode(what_user_typed):
+                    self.update(what_user_typed)
 
             if not self.context.args.debug:
                 os.system('clear')

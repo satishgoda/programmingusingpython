@@ -38,6 +38,12 @@ class Mode(object):
 
     def view(self): pass
 
+    def set_parent(self, mode):
+        self.parent = mode
+
+    def remove_parent(self):
+        self.parent = None
+
 
 class QuitMode(Mode):
     def __init__(self):
@@ -86,9 +92,9 @@ class Context(object):
         current = self.mode
 
         if next.is_top_level or (current.parent is next):
-            current.parent = None
+            current.remove_parent()
         elif next in current.modes:
-            next.parent = current
+            next.set_parent(current)
 
         self.mode = next
 

@@ -24,9 +24,6 @@ class Mode(object):
     def is_top_level(self):
         return False
 
-    def has_sub_modes(self):
-        return len(self.modes)
-
     def menu(self):
         return [mode.name for mode in self.modes]
 

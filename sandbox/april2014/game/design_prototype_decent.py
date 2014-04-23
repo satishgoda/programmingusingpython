@@ -15,17 +15,17 @@ class Mode(object):
         self.modes = list()
         self.parent = None
 
-    def menu(self): return self.modes
-
-    def __call__(self, *args, **kwargs):
-        return self.menu, self.view
+    @property
+    def is_top_level(self): return False
 
     @property
-    def is_top_level(self):
-        return False
-
     def menu(self):
-        return [mode.name for mode in self.modes]
+        _menu = [mode.name for mode in self.modes]
+
+        if (not self.is_top_level) and self.parent:
+            _menu.insert(0, self.parent.name)
+
+        return _menu
 
     def view(self): pass
 
@@ -114,10 +114,7 @@ class InteractionHandler(object):
 
         menuText = ['{0} //'.format(context.appName)]
 
-        if (not mode.is_top_level) and mode.parent:
-            menuText.append(mode.parent.name)
-
-        menuText.extend(mode.menu())
+        menuText.extend(mode.menu)
 
         print(' | '.join(menuText))
 

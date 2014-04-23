@@ -10,22 +10,31 @@ input = raw_input
 
 
 class Mode(object):
-
     def __init__(self):
-        self.modes = list()
+        self._modes = list()
         self.parent = None
 
     @property
     def is_top_level(self): return False
 
     @property
+    def modes(self):
+        _modes = []
+
+        _modes.extend(self._modes)
+
+        if self.parent:
+            _modes.insert(0, self.parent)
+
+        return _modes
+
+    @modes.setter
+    def modes(self, submodes):
+        self._modes = submodes
+
+    @property
     def menu(self):
-        _menu = [mode.name for mode in self.modes]
-
-        if (not self.is_top_level) and self.parent:
-            _menu.insert(0, self.parent.name)
-
-        return _menu
+        return [mode.name for mode in self.modes]
 
     def view(self): pass
 
@@ -61,11 +70,9 @@ class MainMode(Mode):
     def __init__(self):
         super(MainMode, self).__init__()
         self.name = "Main"
-        self.modes = None
 
     @property
-    def is_top_level(self):
-        return True
+    def is_top_level(self): return True
 
     def view(self):
         print('Welcome to the application')
@@ -90,31 +97,14 @@ class InteractionHandler(object):
 
     def __init__(self, context):
         self.context = context
-        self.updateModes()
-
-    def updateModes(self):
-        context = self.context
-        mode = context.mode
-        parent = mode.parent
-
-        self.modes = []
-
-        if parent:
-            self.modes.append(parent)
-
-        if mode.modes:
-            self.modes.extend(mode.modes)
 
     def valid_mode(self, what_user_typed):
-        return what_user_typed in [mode.name for mode in self.modes]
+        return what_user_typed in self.context.mode.menu
 
     def menu(self):
         context = self.context
-        mode = context.mode
 
-        menuText = ['{0} //'.format(context.appName)]
-
-        menuText.extend(mode.menu)
+        menuText = ['{0} //'.format(context.appName)] + context.mode.menu
 
         print(' | '.join(menuText))
 
@@ -131,7 +121,6 @@ class InteractionHandler(object):
 
     def update(self, result):
         self.context.update(result)
-        self.updateModes()
 
     def mainloop(self):
         os.system('clear')
@@ -154,8 +143,7 @@ class InteractionHandler(object):
         if mode.is_top_level:
             raise KeyboardInterrupt
         else:
-            print('CTRL+C')
-            print('WARNING: Cannot quit in this mode "{0}"'.format(mode.name))
+            print('\nWARNING: Cannot quit in this mode "{0}"'.format(mode.name))
             raise EOFError
 
 

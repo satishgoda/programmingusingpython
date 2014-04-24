@@ -100,16 +100,18 @@ class GameMode(Mode):
         super(GameMode, self).__init__()
         self.name = "Game"
 
+    # Display state, message
+    # Ended? score (targer Number), message
     def view(self):
         print('Let us play this game')
 
-    #def interact(self, context):
-        #try:
-            #what_user_typed = input(">>> ").strip()
-        #except EOFError as eofe:
-            #return None
-        #else:
-            #pass
+    def interact(self, context):
+        try:
+            what_user_typed = input(">>> ").strip()
+        except EOFError as eofe:
+            return None
+        else:
+            pass
 
 
 class MainMode(Mode):

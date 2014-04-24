@@ -15,3 +15,5 @@ IPython provides a rich architecture for interactive computing with:
 # Related
 
 * https://pypi.python.org/pypi/ipython
+* http://nbviewer.ipython.org
+* https://github.com/ipython/ipython/wiki/A-gallery-of-interesting-IPython-Notebooks 

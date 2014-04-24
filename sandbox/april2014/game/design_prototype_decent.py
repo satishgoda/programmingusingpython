@@ -3,6 +3,7 @@
 import os
 import signal
 import argparse
+import random
 
 
 # Python 3 compatibility
@@ -29,8 +30,7 @@ class Mode(object):
         return _modes
 
     @modes.setter
-    def modes(self, submodes):
-        self._modes = submodes
+    def modes(self, submodes): self._modes = submodes
 
     @property
     def menu(self):
@@ -38,11 +38,9 @@ class Mode(object):
 
     def view(self): pass
 
-    def set_parent(self, mode):
-        self.parent = mode
+    def set_parent(self, mode): self.parent = mode
 
-    def remove_parent(self):
-        self.parent = None
+    def remove_parent(self): self.parent = None
 
 
 class QuitMode(Mode):
@@ -68,6 +66,7 @@ class QuitMode(Mode):
                 current.remove_parent()
                 return True 
 
+
 class HelpMode(Mode):
     def __init__(self):
         super(HelpMode, self).__init__()
@@ -77,6 +76,25 @@ class HelpMode(Mode):
         print('This is how you use this application')
 
 
+class GamePlay(object):
+    def __init__(self, tries, difficulty):
+        self.difficulty = difficulty
+        self.total_tries = tries
+
+    def initialize(self):
+        self.score = 0
+        self.user_tries = 0
+        extent = (self.difficulty*3)+1
+        self.number_to_guess = random.randint(0, extent)
+
+    def score(self, what_user_typed):
+        if what_user_typed == self.number_to_guess:
+            self.score += 1
+
+    def to_end_game(self):
+        return self.user_tries == self.total_tries
+
+
 class GameMode(Mode):
     def __init__(self):
         super(GameMode, self).__init__()
@@ -84,6 +102,14 @@ class GameMode(Mode):
 
     def view(self):
         print('Let us play this game')
+
+    #def interact(self, context):
+        #try:
+            #what_user_typed = input(">>> ").strip()
+        #except EOFError as eofe:
+            #return None
+        #else:
+            #pass
 
 
 class MainMode(Mode):

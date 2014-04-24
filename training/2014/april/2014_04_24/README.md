@@ -1,15 +1,3 @@
-# ```ipython``` tips
-
-```python
-%history
-%history -r
-%save?
-%save -r foo 1-30
-ls
-!kwrite foo.py
-pwd
-```
-
 # Introduction to ```set``` datatype
 
 
@@ -80,6 +68,9 @@ l2
 l2.index(1)
 l2[0+1:]
 l2[0+1:].index(1)
+
+import array
+array?
 ```
 
 # Operations on ```dict``` datatype
@@ -107,27 +98,11 @@ else:
     print("Does not exist")
 ```
 
+# ```functional``` programming in Python
 
 ```python
-import turtle
-
-
-turtle??
-turtle?
-turtle.Screen??
-turtle.Turtle.color??
-turtle.Screen??
-turtle._Screen??
-turtle.Turtle??
-
-
-%history -r
-%history -r 10000
-!date
 range(11)
-import array
-array?
-list
+
 0 % 2
 4 % 2
 5 % 2
@@ -180,12 +155,11 @@ y = zipped[0][1]
 x, y = zipped[0]
 x
 y
+```
 
+# More ```builtins``` in Python
 
-
-
-%history -r 10000
-unzip
+```python
 ord('A')
 chr(65)
 hex(16)
@@ -198,24 +172,49 @@ int(bin(255))
 int(bin(255), base=2)
 
 int(hex(255), base=16)
+```
+
+# ```ipython``` Notebook and QtConsole
+
+```python
+import matplotlib
+matplotlib?
+```
+
+# ```ipython``` tips
+
+```python
+%history
+%history -r
+%save?
+%save -r foo 1-30
+ls
+!kwrite foo.py
+pwd
+
+import turtle
+turtle??
+turtle?
+turtle.Screen??
+turtle.Turtle.color??
+turtle.Screen??
+turtle._Screen??
+turtle.Turtle??
 
 
+%history -r
+%history -r 10000
+!date
 %history -r 10000
 %save -r session8 1-212
 !kwrite session8.py
-
-
 %save?
 %save??
 %save?
 bin?
 bin??
-import matplotlib
-matplotlib?
-l = 10
-l
-%save -r session8 1-260
 ```
+
 # How do i?
 
 ```python

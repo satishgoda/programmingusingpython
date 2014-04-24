@@ -1,38 +1,25 @@
+# ```ipython``` tips
+
 ```python
 %history
 %history -r
-%history 
-
-
-%history -r
 %save?
-%save -r foo
+%save -r foo 1-30
 ls
 !kwrite foo.py
-
-
-
 pwd
+```
+
+# Introduction to ```set``` datatype
 
 
-
-
-
-
+```python
 set
 
 
-l = [1, 2, 4, 6]
-l1 = [1, 2, 4, 6]
-l2 = [1, 2, 4, 6]
-l2 = [1, 3, 4, 6]
-l2 = [1, 3, 4, 7]
-
-l1
-l2
-
-l2 = [1, 3, 4, 6, 1, 6]
 l1 = [1, 2, 4, 6, 2, 4]
+l2 = [1, 3, 4, 6, 1, 6]
+
 
 l1
 l2
@@ -41,14 +28,20 @@ l2
 s1 = set(l1)
 s1
 s2 = set(l2)
-
 s2
+
 set.difference(s1, s2)
 set.difference(s2, s1)
+
+s1.difference(s2)
+s2.difference(s1)
 
 
 s1 - s2
 s2 - s1
+
+set(l2) - set(l3)
+set(l2) ^ set(l3)
 
 
 s1 +  s2
@@ -59,68 +52,39 @@ s1 & s2
 
 2 in s1
 10 in s2
-l1
 
-for indez, item in enumerate(l1):
-    print("{0} -> {1}".format(index, item))
-for index, item in enumerate(l1):
-    print("{0} -> {1}".format(index, item))
+set("one two one three one".split())
+res = set("one two one three one".split())
+res[0] # Set objects do not support indexing
+```
+
+# Operations on ```list``` data types
+
+```python
 l1.sort()
 l1
+
 l2
 l3 = sorted(l2)
 l2
 l3
-set(l2) - set(l3)
-set(l2) ^ set(l3)
-
-s1.difference(s2)
-s2.difference(s1)
-s1 - s2
-s2 - s1
 
 
-
-
-set("one two one three one".split())
-
-
-
-res = set("one two one three one".split())
-
-res[0]
 l1
 1 in l1
+
 l1.index(1)
-l21
+
 l2
 
 l2.index(1)
 l2[0+1:]
 l2[0+1:].index(1)
+```
 
+# Operations on ```dict``` datatype
 
-import turtle
-
-
-turtle??
-turtle?
-turtle.Screen??
-turtle.Turtle.color??
-turtle.Screen??
-
-
-
-turtle._Screen??
-turtle.Turtle??
-
-
-
-
-
-
-!date
-
+```python
 env = {}
 
 env['i']
@@ -141,6 +105,22 @@ if env.get('i'):
     print("Exists")
 else:
     print("Does not exist")
+```
+
+
+```python
+import turtle
+
+
+turtle??
+turtle?
+turtle.Screen??
+turtle.Turtle.color??
+turtle.Screen??
+turtle._Screen??
+turtle.Turtle??
+
+
 %history -r
 %history -r 10000
 !date
@@ -235,4 +215,10 @@ matplotlib?
 l = 10
 l
 %save -r session8 1-260
+```
+# How do i?
+
+```python
+for index, item in enumerate(l1):
+    print("{0} -> {1}".format(index, item))
 ```

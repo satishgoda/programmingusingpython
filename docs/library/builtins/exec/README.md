@@ -40,6 +40,9 @@ Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 NameError: name 'i' is not defined
 
+>>> env.keys()
+['i', 'a', 'b', '__builtins__']
+
 >>> env['i']
 30
 ```

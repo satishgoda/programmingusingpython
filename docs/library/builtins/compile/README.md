@@ -44,3 +44,4 @@ NameError: name 'a' is not defined
 
 * http://stackoverflow.com/questions/5768684/what-is-a-python-code-object
 * http://late.am/post/2012/03/26/exploring-python-code-objects
+* https://docs.python.org/2.7/reference/datamodel.html#index-59

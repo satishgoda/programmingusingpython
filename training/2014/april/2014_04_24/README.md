@@ -28,11 +28,12 @@ s2.difference(s1)
 s1 - s2
 s2 - s1
 
-set(l2) - set(l3)
-set(l2) ^ set(l3)
+set(l1) - set(l2)
+set(l2) ^ set(l1)
 
 
-s1 +  s2
+s1 +  s2 # TypeError
+
 s1 | s2
 s1 ^ s2
 s1 & s2

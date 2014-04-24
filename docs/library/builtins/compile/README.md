@@ -40,3 +40,7 @@ NameError: name 'a' is not defined
 >>> env['i']
 30
 ```
+# Reading
+
+* http://stackoverflow.com/questions/5768684/what-is-a-python-code-object
+* http://late.am/post/2012/03/26/exploring-python-code-objects

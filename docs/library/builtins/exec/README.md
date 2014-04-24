@@ -46,3 +46,12 @@ NameError: name 'i' is not defined
 >>> env['i']
 30
 ```
+# Related
+
+* [docs/library/builtins/compile/README.md] (https://github.com/satishgoda/programmingusingpython/blob/master/docs/library/builtins/compile/README.md)
+
+# Reading
+
+* http://stackoverflow.com/questions/5768684/what-is-a-python-code-object
+* http://late.am/post/2012/03/26/exploring-python-code-objects
+* https://docs.python.org/2.7/reference/datamodel.html#index-59

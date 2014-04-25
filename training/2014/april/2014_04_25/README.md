@@ -1,4 +1,3 @@
-
 # Intro to ```bpython```
 
 * http://bpython-interpreter.org
@@ -42,7 +41,7 @@ class ListWithLength(list):
 <class 'listwithlength.ListWithLength'>
 ```
 
-# Funcations are objects too
+# Functions are objects too
 
 ```python
 >>> def foo():

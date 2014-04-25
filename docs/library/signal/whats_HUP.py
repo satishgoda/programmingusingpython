@@ -6,6 +6,12 @@ import os
 
 
 def whats_HUP(_signal, frame):
+    
+    if not whats_HUP.called:
+        whats_HUP.called = True
+    else:
+        return
+
     with open("/home/satishg/hup.txt", 'a') as f:
         f.write("Caught hup at {0}\n".format(time.asctime()))
     
@@ -14,6 +20,7 @@ def whats_HUP(_signal, frame):
 
 if __name__ == '__main__':
     whats_HUP.original = signal.getsignal(signal.SIGHUP)
+    whats_HUP.called = False
     
     signal.signal(signal.SIGHUP, whats_HUP)
     

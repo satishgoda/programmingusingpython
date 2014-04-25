@@ -48,14 +48,19 @@ class ListWithLength(list):
 ...     foo.was_called += 1
 ...
 ...
+>>>
+
 >>> foo.was_called = 0
->>>
+
 >>> foo()
 >>> foo()
 >>> foo()
->>>
+
 >>> foo.was_called
 3
 ```
 
+> __Notes__
+
+* After the function definition of ```foo``` we need to create and initialize the ```was_called``` attribute.
 

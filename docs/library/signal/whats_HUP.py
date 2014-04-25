@@ -23,4 +23,4 @@ if __name__ == '__main__':
         with open("/home/satishg/hup.txt", 'r') as f:
             lines = f.readlines()
             message = lines[1].strip() if lines else "No previous HUP history saved"
-            print('\n{line}'.format(line=))
+            print('\n{line}'.format(line=message))

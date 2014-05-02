@@ -13,7 +13,7 @@ input = raw_input
 class Mode(object):
     def __init__(self):
         self._modes = list()
-        self.parent = None
+        self._parent = None
 
     @property
     def is_top_level(self): return False
@@ -38,9 +38,12 @@ class Mode(object):
 
     def view(self): pass
 
-    def set_parent(self, mode): self.parent = mode
+    @property
+    def parent(self): return self._parent
 
-    def remove_parent(self): self.parent = None
+    @parent.setter
+    def parent(self, mode):
+        self._parent = mode if not(mode is None) else None
 
 
 class QuitMode(Mode):
@@ -63,7 +66,7 @@ class QuitMode(Mode):
             else:
                 current = context.mode
                 context.mode = current.parent
-                current.remove_parent()
+                current.parent = None
                 return True 
 
 
@@ -99,19 +102,37 @@ class GameMode(Mode):
     def __init__(self):
         super(GameMode, self).__init__()
         self.name = "Game"
+        self.score = 0
+
+    @property
+    def not_yet_started(game):
+        return not bool(game.score)
+
+    @property
+    def progress(game):
+        if game.score < 3:
+            return True
+        else:
+            game.score = 0
+            return False
 
     # Display state, message
     # Ended? score (targer Number), message
-    def view(self):
-        print('Let us play this game')
+    def view(game):
+        if game.not_yet_started:
+            print('Let us play this game')
+        else:
+            print('Your score is {0}'.format(game.score))
 
-    def interact(self, context):
+    def interact(game, context):
         try:
             what_user_typed = input(">>> ").strip()
         except EOFError as eofe:
             return None
         else:
-            pass
+            game.score += 1
+        finally:
+            return game.progress
 
 
 class MainMode(Mode):
@@ -134,9 +155,9 @@ class Context(object):
         current = self.mode
 
         if next.is_top_level or (current.parent is next):
-            current.remove_parent()
+            current.parent = None
         elif next in current.modes:
-            next.set_parent(current)
+            next.parent = current
 
         self.mode = next
 

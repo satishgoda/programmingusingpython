@@ -5,11 +5,13 @@ import sys
 
 
 def exitfunc_logger(exitfunc):
+    exitfunc_logger.header_done = False
+
     def _draw_header():
         if exitfunc_logger.header_done:
             return
         exitfunc_logger.header_done = True
-        message = "\nPython interpreter is exiting."
+        message = "Python interpreter is exiting."
         h1 = '-'*len(message)
         print('\n'.join([h1, message, h1]))
 
@@ -18,9 +20,9 @@ def exitfunc_logger(exitfunc):
         _draw_header()
         print("\n>>> {0}: {1}\n".format(exitfunc.__name__, exitfunc.__doc__))
         exitfunc(*args, **kwargs)
+
     return wrapped
 
-exitfunc_logger.header_done = False
 
 try:
 

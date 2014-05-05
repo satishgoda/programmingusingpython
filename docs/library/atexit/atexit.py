@@ -18,12 +18,12 @@ context['message'] = "Python is not only a reptile"
 print(context['message'])
 
 
-def update_context(key, value, context):
+def update_context(context, key, value):
     context[key] = value
 
-update_context('message', "Python is also a language", context)
-update_context('count', 1, context)
-update_context('status', 'OK', context)
+update_context(context, 'message', "Python is also a language")
+update_context(context, 'count', 1)
+update_context(context, 'status', 'OK')
 
 
 exit(0)

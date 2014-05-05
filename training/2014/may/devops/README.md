@@ -5,10 +5,11 @@
 * In Python, we ```also``` have classes, objects and methods.
 * Everything is an object in Python
 * Python builtins
+* classes, objects, variables
 * What is a module?
 * Learning concepts using ```turtle``` module
 * Introduction to the ```ipython``` interpreter
-* Modules: ```os```, ```os.path``` and ```subprocess```
+* Modules: ``pwd```, ```os```, ```os.path``` and ```subprocess```
 * ```subprocess``` is a good place to get a hang of systems programming using Python.
 
 ## Notebook

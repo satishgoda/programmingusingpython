@@ -31,3 +31,4 @@ try:
 except SystemExit as e:
     print ("Exception caught")
     context['status'].insert(0, 'SystemExit')
+    raise SystemExit(e)

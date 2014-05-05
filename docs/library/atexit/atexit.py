@@ -1,29 +1,33 @@
 #!/usr/bin/env python
 
 import atexit
+import sys
 
 
-def exitfunc1(context):
-    print("{0}: Python interpreter is exiting..".format(exitfunc1.__name__))
-    for key, value in context.items():
-        print(key, value)
+try:
+    def exitfunc1(context):
+        print("{0}: Python interpreter is exiting..".format(exitfunc1.__name__))
+        for key, value in context.items():
+            print(key, value)
 
-context = {}
+    context = {}
 
-atexit.register(exitfunc1, context)
-
-
-context['message'] = "Python is not only a reptile"
-
-print(context['message'])
+    atexit.register(exitfunc1, context)
 
 
-def update_context(context, key, value):
-    context[key] = value
+    context['message'] = "Python is not only a reptile"
 
-update_context(context, 'message', "Python is also a language")
-update_context(context, 'count', 1)
-update_context(context, 'status', 'OK')
+    print(context['message'])
 
 
-exit(0)
+    def update_context(context, key, value):
+        context[key] = value
+
+    update_context(context, 'message', "Python is also a language")
+    update_context(context, 'count', 1)
+    update_context(context, 'status', ['OK'])
+
+    sys.exit(1)
+except SystemExit as e:
+    print ("Exception caught")
+    context['status'].insert(0, 'SystemExit')

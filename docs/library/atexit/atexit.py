@@ -6,7 +6,11 @@ import sys
 
 try:
     def exitfunc1(context):
-        print("{0}: Python interpreter is exiting..".format(exitfunc1.__name__))
+        """Following is the state of 'context' """
+        print("Python interpreter is exiting.")
+
+        print("{0}: {1}".format(exitfunc1.__name__, exitfunc1.__doc__))
+
         for key, value in context.items():
             print(key, value)
 
@@ -29,6 +33,7 @@ try:
 
     sys.exit(1)
 except SystemExit as e:
-    print ("Exception caught")
+    import inspect
+    print ("Exception caught : {0}({1}) : {2}".format(e.__class__.__name__, e.args[0], inspect.getdoc(e)))
     context['status'].insert(0, 'SystemExit')
-    raise SystemExit(e)
+    raise e

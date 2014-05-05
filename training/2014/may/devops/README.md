@@ -10,3 +10,7 @@
 * Introduction to the ```ipython``` interpreter
 * Modules: ```os```, ```os.path``` and ```subprocess```
 * ```subprocess``` is a good place to get a hang of systems programming using Python.
+
+## Notebook
+
+* [Builtins] (http://nbviewer.ipython.org/github/satishgoda/programmingusingpython/blob/master/training/2014/may/devops/python_builtins.ipynb?create=1)

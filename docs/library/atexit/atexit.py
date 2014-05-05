@@ -4,20 +4,41 @@ import atexit
 import sys
 
 
+def exitfunc_logger(exitfunc):
+    def _draw_header():
+        if exitfunc_logger.header_done:
+            return
+        exitfunc_logger.header_done = True
+        message = "\nPython interpreter is exiting."
+        h1 = '-'*len(message)
+        print('\n'.join([h1, message, h1]))
+
+
+    def wrapped(*args, **kwargs):
+        _draw_header()
+        print("\n>>> {0}: {1}\n".format(exitfunc.__name__, exitfunc.__doc__))
+        exitfunc(*args, **kwargs)
+    return wrapped
+
+exitfunc_logger.header_done = False
+
 try:
+
+    @exitfunc_logger
+    def exitfunc2():
+        print("Bye bye")
+
+    @exitfunc_logger
     def exitfunc1(context):
         """Following is the state of 'context' """
-        print("Python interpreter is exiting.")
-
-        print("{0}: {1}".format(exitfunc1.__name__, exitfunc1.__doc__))
-
         for key, value in context.items():
             print(key, value)
 
+
     context = {}
 
+    atexit.register(exitfunc2)
     atexit.register(exitfunc1, context)
-
 
     context['message'] = "Python is not only a reptile"
 

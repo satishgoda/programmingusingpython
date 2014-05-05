@@ -3,3 +3,5 @@
 message = "Python is not only a reptile"
 
 print(message)
+
+exit(0)

@@ -3,5 +3,4 @@
 * Collaboratively edit IPython notebooks, Sage worksheets, and all other document types
 * Write, compile, and run code in most programming languages
 * Use command line terminals
-
 * https://cloud.sagemath.com

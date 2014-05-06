@@ -1,3 +1,5 @@
+# Overview
+
 > The Cmd class provides a simple framework for writing line-oriented command interpreters. These are often useful for test harnesses, administrative tools, and prototypes that will later be wrapped in a more sophisticated interface.
 
 > A Cmd instance or subclass instance is a line-oriented interpreter framework.
@@ -5,6 +7,8 @@
 > There is no good reason to instantiate Cmd itself; rather, it’s useful as a superclass of an interpreter class you define yourself in order to inherit Cmd‘s methods and encapsulate action methods.
 
 * https://docs.python.org/dev/library/cmd.html
+
+# cmd?
 
 ```
 Type:           module
@@ -58,4 +62,62 @@ Docstring:
 
     These interpreters use raw_input; thus, if the readline module is loaded,
     they automatically support Emacs-like command history and editing features.
+```
+
+# Quick example
+
+```python
+In [1]: from cmd import Cmd
+
+In [2]: 
+
+In [3]: c = Cmd()
+
+In [4]: c.cmdloop()
+(Cmd) *** Unknown syntax: EOF
+(Cmd) help                   
+
+Undocumented commands:
+======================
+help
+
+(Cmd) ?
+
+Undocumented commands:
+======================
+help
+
+(Cmd) ---------------------------------------------------------------------------
+KeyboardInterrupt                         Traceback (most recent call last)
+
+/home/satishg/education/python/devops/training/session1/<ipython console> in <module>()
+
+/usr/lib64/python2.6/cmd.pyc in cmdloop(self, intro)
+    128                     if self.use_rawinput:
+    129                         try:
+--> 130                             line = raw_input(self.prompt)
+    131                         except EOFError:
+    132                             line = 'EOF'
+
+KeyboardInterrupt:
+
+In [5]: c.intro = "Default cmd.Cmd() implementation"
+
+In [6]: c.cmdloop()
+Default cmd.Cmd() implementation
+(Cmd) ---------------------------------------------------------------------------
+KeyboardInterrupt                         Traceback (most recent call last)
+
+/home/satishg/education/python/devops/training/session1/<ipython console> in <module>()
+
+/usr/lib64/python2.6/cmd.pyc in cmdloop(self, intro)
+    128                     if self.use_rawinput:
+    129                         try:
+--> 130                             line = raw_input(self.prompt)
+    131                         except EOFError:
+    132                             line = 'EOF'
+
+KeyboardInterrupt:
+
+In [7]:
 ```

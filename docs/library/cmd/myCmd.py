@@ -10,6 +10,8 @@ class MyCmd(cmd.Cmd):
     intro = "Command interpreter for my commands"
     ruler = "^"
 
+    # Internal methods
+
     def _do_who(self, who):
         """For internal use only
 
@@ -21,6 +23,8 @@ class MyCmd(cmd.Cmd):
             print (e)
         else:
             print('{0}\n    {1}'.format(e, e.title))
+
+    # Command actions
 
     def do_whoami(self, arg):
         """Who am i really?
@@ -45,8 +49,16 @@ class MyCmd(cmd.Cmd):
 
         Bye bye bye
         """
-        raise KeyboardInterrupt('command "bye"')
+        return True
 
+    # Stubs
+
+    def preloop(self):
+        print "Command loop is about to begin"
+
+    def postloop(self):
+        print "Command loop is about to end"
+        raise KeyboardInterrupt('command "{0}"'.format(self.lastcmd))
 
 if __name__ == '__main__':
     mycmd = MyCmd()

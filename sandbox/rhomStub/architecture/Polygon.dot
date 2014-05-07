@@ -1,0 +1,32 @@
+digraph G
+{
+    rankdir=LR;
+    /* Nodes */
+    
+    bmesh_polygon [label="Polygon", shape=box];
+    polygon_vertices [label="Vertices", shape=circle];
+    vertex_table [label="Vertex Table", shape=ellipse];
+
+    poly_group [label="Groups", shape=circle];
+    poly_group_deform [label="*Deform", shape=ellipse];
+    poly_group_mtl [label="*Mtl", shape=ellipse];
+    poly_group_fur [label="*Fur", shape=ellipse];
+    poly_group_DLV [label="DLV", shape=ellipse];
+    poly_group_smoo [label="smoo", shape=ellipse];
+    poly_group_misc [label="*Flip", shape=ellipse];
+
+    uv_layers [label="UVs", shape=circle];
+    uv_layer_1 [label="uv", shape=ellipse];
+    uv_layer_2 [label="uv2", shape=ellipse];
+
+    /* Connections */
+
+    bmesh_polygon -> {polygon_vertices} [label="built out of"];
+    polygon_vertices -> {vertex_table} [label="index into the "];
+
+    bmesh_polygon -> {poly_group} [label="Can be part of.."];
+    poly_group -> {poly_group_deform, poly_group_mtl, poly_group_fur, poly_group_DLV, poly_group_smoo, poly_group_misc};
+
+    bmesh_polygon -> {uv_layers} [label="Can have"];
+    uv_layers -> {uv_layer_1, uv_layer_2};
+}

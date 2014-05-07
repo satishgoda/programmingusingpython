@@ -1,0 +1,16 @@
+digraph G {
+    compound=true;
+    nodesep=1.0;
+    
+    subgraph Cluster_A {
+        label="Exporter With Rhombus Stub";
+        a -> b; a -> c;
+    }
+    
+    subgraph Cluster_B {
+        label="Exporter With Rhombus";
+        d -> e;  e -> f;
+    }
+
+    a -> e [ ltail=cluster_A, lhead=cluster_B ];
+}

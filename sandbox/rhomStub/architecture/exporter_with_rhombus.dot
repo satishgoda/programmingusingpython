@@ -1,0 +1,24 @@
+digraph G {
+    label = "Exporter using Rhombus"
+    /* Graph Nodes */
+    
+    BMesh [label="Blender\nMesh", shape=circle, color=blue];
+    
+    ProcessBmesh [label="Adapt\nfor\nRhombus\nMesh", shape=box, color=maroon, style=filled];
+    
+    MeshExportData [label="Adapted\nBMesh\nData", shape=circle, color=blue];
+    
+    RhombusExporterCommands [label="Rhombus\nCommands", shape=diamond, color=yellow, style=filled];
+   
+    Obn [label="The Obn", shape=circle, color=blue];
+
+    /* Graph Connections */
+
+    BMesh -> ProcessBmesh;
+    
+    ProcessBmesh -> MeshExportData;
+
+    RhombusExporterCommands -> MeshExportData [label="Query"];
+
+    RhombusExporterCommands -> Obn [label="Create"]; 
+}

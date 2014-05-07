@@ -1,0 +1,59 @@
+digraph G {
+    label = "Exporter using Rhombus Stub for Thomas"
+    /* Graph Nodes */
+    
+    BMesh [label="Blender\nMesh", shape=circle, color=blue, style=filled];
+    
+    ProcessBmesh [label="Adapt\nfor\nRhombus\nMesh", shape=box, color=maroon, style=filled];
+    
+    MeshExportData [label="Adapted\nBMesh\nData", shape=circle, color=blue];
+    
+    RhombusExporterCommands [label="Rhombus\nCommands", shape=diamond, color=yellow, style=filled];
+    
+    RMeshCreate [label="Create\nRhombus\nMesh", shape=diamond, color=yellow, style=filled];
+    
+    RMeshData [label="Rhombus\nMesh\nData", shape=circle, color=blue];
+    
+    RMeshCommandsList [label="List\nof\nRhombus\nCommands", shape=circle, style=dotted, color=blue];
+
+    RMeshUpdate [label="Update\nRhombus\nMesh", shape=diamond, color=yellow, style=filled];
+    
+    RMeshWrite [label="Write\nRhombus\nMesh", shape=diamond, color=yellow, style=filled];
+    
+    RhombusStub [label="Rhombus\nStub", shape=box, color=maroon, style=filled];
+    
+    RMeshCommandsFile [label="Rhombus\nCommand\nFile", shape=circle, color=blue];
+    
+    Obn [label="The Obn", shape=circle, color=blue];
+
+    /* Graph Connections */
+
+    BMesh -> ProcessBmesh;
+    
+    ProcessBmesh -> MeshExportData;
+
+    RhombusExporterCommands -> RhombusStub [label="Routed through"];
+
+    RhombusStub -> RMeshCreate;
+
+    RMeshCreate -> RMeshData [label="In Memory"];
+    
+    RMeshData -> RMeshCommandsList [label="Has-A"];
+
+    RhombusExporterCommands -> MeshExportData [label="Query"];
+    
+    RhombusStub -> RMeshUpdate;
+
+    RMeshUpdate -> RMeshData [label="Point/TexCoord Tables\nGroups/Materials Tables\nElements and Membership"];
+
+    RhombusStub -> RMeshWrite;
+    
+    RMeshWrite -> RMeshCommandsList [label="Query"];
+    
+    RMeshWrite -> RMeshCommandsFile [label="Write to disk"];
+    
+    RMeshWrite -> Obn [label="Create"];
+
+    RMeshCommandsFile -> Obn [label="Created by executing", dir=back, constraint=false];
+    
+}

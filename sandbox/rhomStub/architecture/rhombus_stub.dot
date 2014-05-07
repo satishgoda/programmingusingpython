@@ -1,0 +1,32 @@
+digraph G {
+    compound=true;
+    nodesep=1.0;
+    
+    subgraph Blender {
+        label="Blender";
+        Blender [shape=box];
+        BMesh [shape=circle];
+        Python33 [label="Python 3.3", shape=diamond];
+        Preprocess [label="Preprocess\nGroup membership\nuv layer data", shape=ellipse];
+        PreprocessedData [label="Processed \nmesh \ndata", shape=circle];
+
+        Blender -> BMesh [label="Python rocks"];
+        BMesh -> Python33;
+        Python33 -> Preprocess [label=" Step 1 "];
+        Preprocess -> PreprocessedData [label="Generates data structure"];
+    }
+
+    subgraph Rhombus_Stub {
+        label="Rhombus Stub";
+        RhombusStub [label="Rhombus \nmodule \nstub", shape=ellipse];
+        RhombusCommands [label="rhombus.py\nPython 2.6", shape=circle];
+        ExportedOBN [shape=circle];
+    
+        RhombusStub -> RhombusCommands [label="Creates \nand\n executes"];
+        RhombusCommands -> ExportedOBN;
+    }
+
+    Python33 -> RhombusStub [label=" Step 2 "];
+    PreprocessedData -> RhombusStub [label="Passed to \nRhombus \nstub calls"];
+}
+

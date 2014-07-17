@@ -29,3 +29,20 @@ def collapse(sequence):
                 end = start = current
 
 print list(collapse(frames))
+
+g = collapse(frames)
+
+while True:
+    try:
+        print g.next()
+    except StopIteration:
+        break
+
+print list(g)
+
+collapsed = []
+
+for item in collapse(frames):
+    collapsed.append(item)
+
+print collapsed

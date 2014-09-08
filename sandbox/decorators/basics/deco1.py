@@ -15,8 +15,9 @@ def path_header(wrapped):
 
 @path_header
 def main(*args, **kwargs):
+    """This is the main function"""
     print "Decorators are nice"
 
 if __name__ == '__main__':
-    print main
+    print("{0} \n   {1}\n   {2}".format(main, main.__name__, main.__doc__))
     main()

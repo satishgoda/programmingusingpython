@@ -1,7 +1,7 @@
 """
-C
-B
 A
+B
+C
 ABC
 {'a': 'A', 'c': 'C', 'b': 'B', 'abc': 'ABC'}
 """
@@ -26,7 +26,7 @@ class C(object):
         print self.c
 
 
-class ABC(A, B, C):
+class ABC(C, B, A):
     def __init__(self):
         super(ABC, self).__init__()
         self.abc = self.__class__.__name__

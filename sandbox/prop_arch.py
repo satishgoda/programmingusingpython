@@ -1,5 +1,4 @@
-# import pdb
-# pdb.set_trace()
+import pdb
 
 class Property(object):
     def __get__(self, instance, owner):
@@ -10,11 +9,11 @@ class Property(object):
         
     def __set__(self, instance, value):
         instance.__dict__[self.name] = value
-
+        
     def __repr__(self):
         s = super(Property, self).__repr__()
         return self.name + " " + s
-    
+
 class IntProperty(Property):
     default = 0
     
@@ -24,23 +23,23 @@ class FloatProperty(Property):
 class StringProperty(Property):
     default = "You did not specify anything"
 
-class Properties(tuple):
-    pass
-
-class ClassWithProperties(type):
+class PropertiesBased(type):
 
     def __new__(mcs, name, bases, namespace):
         properties = []
         for var, value in namespace.iteritems():
-            if isinstance(value, Property):
-                value.name = var
-                properties.append(value)
-        namespace['properties'] = property(lambda cls: tuple(properties[:]))
+            try:
+                if value.__class__.mro()[-2].__name__ in ('Property',):
+                    value.name = var
+                    properties.append(value)
+            except TypeError:
+                continue
+        namespace['properties'] = tuple(properties[:])
         cls = super(mcs, mcs).__new__(mcs, name, bases, namespace)
         return cls
 
 class PropertyGroup(Property):
-    __metaclass__ = ClassWithProperties
+    __metaclass__ = PropertiesBased
 
     def __get__(self, instance, owner):
         if instance is None:
@@ -49,36 +48,11 @@ class PropertyGroup(Property):
             per_instance_group = instance.__dict__.get(self.name)
             if per_instance_group is None:
                 instance.__dict__[self.name] = per_instance_group = self.__class__()
+                per_instance_group.name = self.name
             return per_instance_group
 
     def __set__(self, instance, value):
         raise ValueError("You cannot set a PropertyGroup")
-    
-class AppClass(object):
-    __metaclass__ = ClassWithProperties
-    
-    def resetToDefaults(self):
-        for prop in self.properties:
-            value = self.__dict__.get(prop.name, None)
-            if value and value != prop.default:
-                del self.__dict__[prop.name]
-    
-    def saveAsPreset(self, name):
-        props = []
-        
-        for prop in self.properties:
-            value = self.__dict__.get(prop.name, None)
-            if value and value != prop.default:
-                props.append((prop.name, value))
-        
-        if props:
-            return (name, props)
-        
-        raise UserWarning("Nothing to be saved")
-    
-    def applyPreset(self, preset):
-        for attr, value in preset[1]:
-            setattr(self, attr, value)
         
 class SettingsGroup(PropertyGroup):
     age = IntProperty()
@@ -87,7 +61,38 @@ class SettingsGroup(PropertyGroup):
 class FoldersGroup(PropertyGroup):
     folder1 = SettingsGroup()
     folder2 = SettingsGroup()
+
+class AppClass(object):
+    __metaclass__ = PropertiesBased
     
+    def _printLeaf(self, parent, prop_path, prop):
+        try:
+            value = parent.__dict__[prop.name]
+        except:
+            value = prop.default
+        dotted_path = '.'.join(prop_path)
+        print "{0} = {1}".format(dotted_path, value)
+    
+    def _printGroup(self, prop_path, group):
+        for prop in group.properties:
+            prop_path.append(prop.name)
+            if isinstance(prop, PropertyGroup):
+                self._printGroup(prop_path, group.__dict__[prop.name])
+            else:
+                self._printLeaf(group, prop_path, prop)
+            prop_path.pop()
+    
+    def printFromRoot(self):
+        prop_base_path = [self.__class__.__name__]
+        
+        for prop in self.properties:
+            prop_path = prop_base_path[:]
+            prop_path.append(prop.name)
+            if isinstance(prop, PropertyGroup):
+                self._printGroup(prop_path, self.__dict__[prop.name])
+            else:
+                self._printLeaf(self, prop_path, prop)
+
 class Foo(AppClass):
     x = IntProperty()
     y = FloatProperty()
@@ -95,3 +100,4 @@ class Foo(AppClass):
     settings = SettingsGroup()
     folders = FoldersGroup()
 
+# pdb.set_trace()

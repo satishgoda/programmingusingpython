@@ -54,13 +54,26 @@ class PropertyGroup(Property):
     def __set__(self, instance, value):
         raise ValueError("You cannot set a PropertyGroup")
         
-class SettingsGroup(PropertyGroup):
-    age = IntProperty()
-    author = StringProperty()
+class RenderGlobals(PropertyGroup):
+    threads = IntProperty()
+    flags = StringProperty()
 
-class FoldersGroup(PropertyGroup):
-    folder1 = SettingsGroup()
-    folder2 = SettingsGroup()
+# class Layer(PropertyGroup):
+#     objects = StringProperty()
+
+# class MainLayer(Layer):    
+class MainLayer(PropertyGroup):
+    lights = StringProperty()
+    objects = StringProperty()
+    
+# class OcclusionLayer(Layer):
+class OcclusionLayer(PropertyGroup):    
+    material = StringProperty()
+    objects = StringProperty()
+
+class LayerBlocks(PropertyGroup):
+    main = MainLayer()
+    occ = OcclusionLayer()
 
 class AppClass(object):
     __metaclass__ = PropertiesBased
@@ -93,11 +106,10 @@ class AppClass(object):
             else:
                 self._printLeaf(self, prop_path, prop)
 
-class Foo(AppClass):
-    x = IntProperty()
-    y = FloatProperty()
-    z = StringProperty()
-    settings = SettingsGroup()
-    folders = FoldersGroup()
-
-# pdb.set_trace()
+class RootNode(AppClass):
+    frame_start = IntProperty()
+    frame_end = IntProperty()
+    shutter = FloatProperty()
+    description = StringProperty()
+    renderGlobals = RenderGlobals()
+    layerBlocks = LayerBlocks()

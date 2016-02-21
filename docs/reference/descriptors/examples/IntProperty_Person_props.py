@@ -1,6 +1,7 @@
 from collections import OrderedDict
 
-######## 
+########
+ 
 class Property(object):
     def __init__(self, name, description):
         self._name = name
@@ -10,9 +11,7 @@ class Property(object):
         if inst is None:
             return self
         else:
-            props = inst.__dict__.get('_props', None)
-            if not props:
-                props = inst.__dict__['_props'] = OrderedDict()
+            props = inst.__dict__.setdefault('_props', OrderedDict())
             props[self._name] = value
 
     def __get__(self, inst, cls):
@@ -20,11 +19,13 @@ class Property(object):
     
     def resetValue(self, inst):
         props = inst.__dict__.get('_props', None)
+        
         if not props:
             raise ValueError("No properties have been ever initialized")
-        else:
-            if not props.get(self._name, None):
-                raise ValueError("Property has never been initialized")
+        
+        if not props.get(self._name, None):
+            raise ValueError("Property has never been initialized")
+        
         props[self._name] = self._default
 
 class IntProperty(Property):
@@ -35,13 +36,10 @@ class IntProperty(Property):
     def __get__(self, inst, cls):
         if inst is None:
             return self
-        else:
-            props = inst.__dict__.get('_props', None)
-            if not props:
-                props = inst.__dict__['_props'] = OrderedDict()
-            
-            value = props.get(self._name, None)
-            return value or self._default
+        
+        props = inst.__dict__.setdefault('_props', OrderedDict())
+        
+        return props.get(self._name, None) or self._default
 
 ########
 
@@ -69,9 +67,13 @@ try:
 except ValueError as e:
     print e
 
+print person2.__dict__
+
 print person2.age
 
 person2.age = 35
+
+print person2.__dict__
 
 print person2.age
 

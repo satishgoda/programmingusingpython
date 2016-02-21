@@ -29,9 +29,7 @@ class IntProperty(Property):
             return self
         else:
             value = inst.__dict__.get(self._name, None)
-            if not value:
-                return self._default
-            return value
+            return value or self._default
 ########
 
 class Person(object):

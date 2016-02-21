@@ -10,9 +10,9 @@ class Property(object):
     def __set__(self, inst, value):
         if inst is None:
             return self
-        else:
-            props = inst.__dict__.setdefault('_props', OrderedDict())
-            props[self._name] = value
+        
+        props = inst.__dict__.setdefault('_props', OrderedDict())
+        props[self._name] = value
 
     def __get__(self, inst, cls):
         if inst is None:
@@ -37,11 +37,15 @@ class Property(object):
         
         props[self._name] = self._default
 
+print Property
+
 ########
 
 class PropertyHasDefaultValue(object):
     def __init__(self, default):
         self._default = default
+
+print PropertyHasDefaultValue
 
 ########
 
@@ -50,6 +54,8 @@ class IntProperty(Property, PropertyHasDefaultValue):
         super(IntProperty, self).__init__(name, description)
         PropertyHasDefaultValue.__init__(self, default)
 
+print IntProperty
+
 ########
 
 
@@ -57,15 +63,39 @@ class StringProperty(Property):
     def __init__(self, name, description):
         super(StringProperty, self).__init__(name, description)
 
+print StringProperty
+
 ########
 
-class Person(object):
+class PropertiesBasedMixin():
+    def resetToDefaults(self):
+        print "\nResetting person's properties to default values\n"
+
+        instance_properties = self.__dict__['_props']
+
+        for prop_name in instance_properties:
+            prop = self.__class__.__dict__[prop_name]
+            print prop._name, instance_properties[prop_name]
+            try:
+                prop.resetValue(self)
+            except ValueError as e:
+                print "\t", e
+            else:
+                print "\t", prop._name, instance_properties[prop_name]
+
+print PropertiesBasedMixin
+
+########
+
+class Person(object, PropertiesBasedMixin):
     name = StringProperty("name", "Name of the person")
     age = IntProperty('age', "Age of the person", -1)
     degrees = IntProperty('degrees', "Number of degrees held by this person", 0)
     
     def __init__(self, name):
         self.name = name
+
+print Person
 
 ########
 
@@ -104,16 +134,6 @@ person2.degrees = 2
 
 print person2.__dict__
 
-print "\nResetting person's properties to default values\n"
+person2.resetToDefaults()
 
-instance_properties = person2.__dict__['_props']
-
-for prop_name in instance_properties:
-    prop = person2.__class__.__dict__[prop_name]
-    print prop._name, instance_properties[prop_name]
-    try:
-        prop.resetValue(person2)
-    except ValueError as e:
-        print "\t", e
-    else:
-        print "\t", prop._name, instance_properties[prop_name]
+print person2.__dict__

@@ -137,3 +137,57 @@ print person2.__dict__
 person2.resetToDefaults()
 
 print person2.__dict__
+
+########
+
+"""
+
+>>> (executing line 1 of "Person.py")
+
+>>> (executing lines 4 to 40 of "Person.py")
+<class '__main__.Property'>
+
+>>> (executing lines 43 to 48 of "Person.py")
+<class '__main__.PropertyHasDefaultValue'>
+
+>>> (executing lines 51 to 57 of "Person.py")
+<class '__main__.IntProperty'>
+
+>>> (executing lines 60 to 66 of "Person.py")
+<class '__main__.StringProperty'>
+
+>>> (executing lines 69 to 86 of "Person.py")
+__main__.PropertiesBasedMixin
+
+>>> (executing lines 89 to 98 of "Person.py")
+<class '__main__.Person'>
+
+>>> (executing lines 101 to 104 of "Person.py")
+Name of the person
+age
+Age of the person
+
+>>> (executing lines 107 to 115 of "Person.py")
+{'_props': OrderedDict([('name', 'Bugs Bunny')])}
+{'_props': OrderedDict([('name', 'Bugs Bunny'), ('age', 30), ('degrees', 10000L)])}
+
+>>> (executing lines 118 to 139 of "Person.py")
+{'_props': OrderedDict([('name', 'Daffy Duck')])}
+Property cannot have a default value, so cannot reset to default
+Daffy Duck
+-1
+0
+{'_props': OrderedDict([('name', 'Daffy Duck'), ('age', 35), ('degrees', 2)])}
+
+Resetting person's properties to default values
+
+name Daffy Duck
+	Property cannot have a default value, so cannot reset to default
+age 35
+	age -1
+degrees 2
+	degrees 0
+{'_props': OrderedDict([('name', 'Daffy Duck'), ('age', -1), ('degrees', 0)])}
+
+>>> 
+"""

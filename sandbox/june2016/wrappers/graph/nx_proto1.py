@@ -12,13 +12,18 @@ class AppClass(object):
         self.name = name
 
 class GraphNodeAttrs(object):
-    def __init__(self, node, graph):
-        self.__dict__['graph'] = graph
-        self.__dict__['node'] = node
+    """
+    Provides an simple interface to the netwrokx node 
+    attributes structure
+    """
+    def __init__(self, noderef):
+        self.__dict__['noderef'] = noderef
     
     @property
     def node(self):
-        return self.__dict__['graph'].node[self.__dict__['node']]
+        noderef = self.__dict__['noderef']
+        graph = noderef.graph
+        return graph.node[noderef]
     
     def __getattr__(self, attr):
         return self.node[attr]
@@ -30,7 +35,7 @@ class GraphNode(object):
     def __init__(self, data, graph):
         self.data = data
         self.graph = graph
-        self._attrs = GraphNodeAttrs(self, graph)
+        self._attrs = GraphNodeAttrs(self)
     
     @property
     def name(self):
@@ -64,11 +69,16 @@ dg = Graph()
 a1gn = GraphNode(a1, dg)
 a2gn = GraphNode(a2, dg)
 
+print(a1gn.attrs.node)
+
 dg.add_node(a1gn)
 dg.add_node(a2gn)
 
+print(a2gn.attrs.node)
+
 a1gn.attrs.style = 'filled, bold'
 a1gn.attrs.fillcolor = 'green'
+
 
 print dg.node
 

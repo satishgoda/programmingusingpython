@@ -1,5 +1,6 @@
 # http://traitlets.readthedocs.io/en/stable/using_traitlets.html
 
+
 import getpass
 
 from traitlets import HasTraits, Unicode, default
@@ -25,4 +26,8 @@ i.num
 
 i.num = 10
 
+Identity.traits(i)
+
 Identity.class_own_traits()
+
+Identity.trait_names(i)

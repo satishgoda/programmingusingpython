@@ -53,4 +53,5 @@ ast.dump(module, annotate_fields=False, include_attributes=False)
 
 ```
 
-https://hg.python.org/cpython/file/2.7/Lib/ast.py
+* https://hg.python.org/cpython/file/2.7/Lib/ast.py
+* http://readevalprint.com/2014/07/01/fun-with-python-ast.html

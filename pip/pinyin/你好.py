@@ -1,4 +1,5 @@
 # https://github.com/lxyu/pinyin
+# https://github.com/staff0rd/mandarin
 
 import pinyin
 

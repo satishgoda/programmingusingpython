@@ -1,3 +1,4 @@
+
 class Operator(AppObjectBase):
     id = IntAttributeDefinition(123).asReadOnly()
     label = StringAttributeDefinition('An Example Operator')
@@ -7,6 +8,7 @@ class Operator(AppObjectBase):
     @property
     def optype(self):
         return "/ops"
+
 
 oppresets = OperatorPresets()
 
@@ -43,6 +45,25 @@ op2 = Operator("op2")
 
 oppresets.apply(op2, 'preset1')
 
+## Terse output
+
+"""
+Operator preset 'defaults' saved for '/ops/op1'
+{'count': 0, 'id': 123, 'uid': '0x123', 'label': 'An Example Operator'}
+Operator preset 'defaults' already exists
+Illegal value: 0 <= 100 && 100 <= 10
+Operator preset 'preset1' saved for '/ops/op1'
+{'count': 9, 'id': 123, 'uid': '0x123', 'label': 'My first operator'}
+Operator preset 'preset2' does not exist
+Operator preset 'defaults' applied to '/ops/op1'
+{'count': 0, 'id': 123, 'uid': '0x123', 'label': 'An Example Operator'}
+Operator preset 'preset1' applied to '/ops/op1'
+{'count': 9, 'id': 123, 'uid': '0x123', 'label': 'My first operator'}
+Operator preset 'preset1' applied to '/ops/op1'
+{'count': 9, 'id': 123, 'uid': '0x123', 'label': 'My first operator'}
+"""
+
+## Detailed output
 
 """
 In [220]: oppresets = OperatorPresets()

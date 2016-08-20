@@ -1,0 +1,24 @@
+digraph "classes_attributes" {
+charset="utf-8"
+rankdir=BT
+"0" [label="{AppObjectBase|\l|name()\lpath()\l}", shape="record"];
+"1" [label="{Attribute|defn\linstance\l|default()\lname()\lpath()\lreadOnly()\lvalue()\l}", shape="record"];
+"2" [label="{AttributeDefinition|\l|asReadOnly()\ldefault()\lname()\l}", shape="record"];
+"3" [label="{DefinesAttributes|\l|}", shape="record"];
+"4" [label="{IntAttribute|\l|}", shape="record"];
+"5" [label="{IntAttributeDefinition|max : int\lmin : int\l|}", shape="record"];
+"6" [label="{Operator|count\lid\llabel\luid\l|optype()\l}", shape="record"];
+"7" [label="{OperatorPresets|\l|add()\lapply()\l}", shape="record"];
+"8" [label="{StringAttribute|\l|}", shape="record"];
+"9" [label="{StringAttributeDefinition|\l|}", shape="record"];
+"4" -> "1" [arrowhead="empty", arrowtail="none"];
+"5" -> "2" [arrowhead="empty", arrowtail="none"];
+"6" -> "0" [arrowhead="empty", arrowtail="none"];
+"8" -> "1" [arrowhead="empty", arrowtail="none"];
+"9" -> "2" [arrowhead="empty", arrowtail="none"];
+"3" -> "0" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="__metaclass__", style="solid"];
+"5" -> "6" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="count", style="solid"];
+"5" -> "6" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="id", style="solid"];
+"9" -> "6" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="label", style="solid"];
+"9" -> "6" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="uid", style="solid"];
+}

@@ -3,12 +3,16 @@ Classes Implemented
 -------------------
 
   AttributeDefinition
+  IntAttributeDefinition(AttributeDefinition)
+  StringAttributeDefinition(AttributeDefinition)
   
   Attribute
+  IntAttribute(Attribute)
+  StringAttribute(Attribute)
   
   DefinesAttributes(type)
   
-  AppObjectBase (__metaclass__ = DefinesAttributes )
+  AppObjectBase(__metaclass__ = DefinesAttributes )
   
   Operator(AppObjectBase)
   

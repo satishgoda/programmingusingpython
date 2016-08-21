@@ -2,7 +2,7 @@
 About
 -----
 
-By making use of Python's descriptor protocol, I have implemented a custom attributes system.
+By making use of Python's descriptor protocol, I have prototyped a very basic custom attributes system. The attributes can also be saved and loaded back as presets.
 
 -------------------
 Classes Implemented

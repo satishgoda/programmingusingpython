@@ -6,6 +6,51 @@ By making use of ``Python's descriptor protocol``, I have prototyped a very basi
 
 Attributes are defined on a class that is a subtype of ``DefinesAttributes``. At attribute definition stage, one can also mark them as read-only. When an instance of the ``DefinesAttributes`` subtype accesses the ``AttributeDefinition`` subtype, Python invokes the customized descriptor machinery and gets and sets the values.
 
+
+.. code:: Python
+
+    class Operator(AppObjectBase):
+        logotype = "/ops"
+        id = IntAttributeDefinition(123).asReadOnly()
+        label = StringAttributeDefinition('An Example Operator')
+        count = IntAttributeDefinition(0, min=0, max=10)
+
+
+    oppresets = OperatorPresets()
+
+    op1 = Operator("op1")
+
+    oppresets.add(op1, 'defaults')
+
+    try:
+        oppresets.add(op1, 'defaults')
+    except ValueError as e:
+        print e
+
+    try:
+        op1.count.value = 100
+    except ValueError as e:
+        print e
+    
+    op1.count.value = 9
+
+    op1.label.value = "My first operator"
+
+    oppresets.add(op1, 'preset1')
+
+    try:
+       oppresets.apply(op1, 'preset2')
+    except NameError as e:
+        print e
+    
+    oppresets.apply(op1, 'defaults')
+
+    oppresets.apply(op1, 'preset1')
+
+    op2 = Operator("op2")
+
+    oppresets.apply(op2, 'preset1')
+
 -------------------
 Classes Implemented
 -------------------

@@ -2,11 +2,11 @@
 About
 -----
 
-By making use of ``Python's descriptor protocol``, I have prototyped a very basic ``custom attributes system``. The attributes can also be saved and loaded back as presets. 
+By making use of ``Python's descriptor protocol``, I have prototyped a very basic ``custom attributes system``.
 
 Attributes are defined on a class that is a subtype of ``DefinesAttributes``. At attribute definition stage, one can also mark them as read-only. When an instance of the ``DefinesAttributes`` subtype accesses the ``AttributeDefinition`` subtype, Python invokes the customized descriptor machinery and gets and sets the values.
 
-The ``OperatorPresets`` class supports operators for adding and applying presets on ``Operator`` instances. My implementation of the custom descriptor attributes makes the job of serializing and serializing attribute name and values an easy process.
+The attributes can also be saved and loaded back as presets. The ``OperatorPresets`` class supports operations for adding and applying presets on ``Operator`` instances. My implementation of the custom descriptor attributes makes the job of serializing and serializing attribute names and values an easy process.
 
 
 .. code:: Python

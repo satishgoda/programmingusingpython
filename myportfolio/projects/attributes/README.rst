@@ -91,3 +91,10 @@ __________________
 
     {'count': 9, 'id': 123, 'uid': '0x123', 'label': 'My first operator'}
 
+
+_______________
+References
+_______________
+* https://docs.python.org/2/howto/descriptor.html
+
+* http://martyalchin.com/2007/nov/23/python-descriptors-part-1-of-2/

@@ -1,12 +1,30 @@
+id = 1
+idMap = OrderedDict()
+
+def getId(item):
+    global id
+    global idMap
+    
+    if item not in idMap:
+        print "adding"
+        idMap[item] = id
+        id += 1
+    else:
+        print "exists"
+    
+    return idMap[item]
+
 for item in scene.items():
+    iid = getId(item)
     itemType = item.__class__.__name__
     pos = item.pos()
-    print itemType, pos.x(), pos.y()
-    print '\t', hex(id(item))
+    print itemType, iid, pos.x(), pos.y()
     if isinstance(item, Arrow):
-        print '\t\t', hex(id(item.myStartItem))
-        print '\t\t', hex(id(item.myEndItem))
+        print '\t\t', getId(item.myStartItem)
+        print '\t\t', getId(item.myEndItem)
 
+##
+    
 item.transform()
 item.type()
 type(item)
@@ -23,6 +41,7 @@ class ItemPos(AttributesGroupDefinition):
     y = FloatAttributeDefinition(0.0, min=-10000.0, max=10000000.0)
 
 class Item(AppObjectBase):
+    id = IntAttributeDefinition()
     itemClass = StringAttributeDefinition()
     itemPos = ItemPos()
     
@@ -37,23 +56,17 @@ item1.itemClass.value = item.__class__.__name__
 item1.itemPos.x.value = -100.0 #pos.x()
 item1.itemPos.y.value = 300.0 # pos.y()
 
-##
-
-serialized = printAttributes(item1, {})
+serialized = printAttributes(item1, OrderedDict())
 
 print serialized
-
-##
 
 item2 = Item("item2")
 
 print printAttributes(item2, {})
 
-##
-
 itemClass = serialized.pop('itemClass')
 
-item2.itemClass.value = itemClass[1]
+item2.itemClass.value = itemClass
 
 ##
 
@@ -61,12 +74,11 @@ for attrName, data in serialized.iteritems():
     attr = getattr(item2, attrName)
     if isinstance(attr, AttributesGroupDefinition):
         print attr
-        for attrName, data in data.iteritems():
+        for attrName, value in data.iteritems():
             gattr = getattr(attr, attrName)
-            gattr.value = data[1]
+            gattr.value = value
     else:
-        path, value = data
-        print attr, path, value
+        attr.value = data
 
 ##
 

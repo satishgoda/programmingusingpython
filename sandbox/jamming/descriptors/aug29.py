@@ -2,7 +2,11 @@ for item in scene.items():
     itemType = item.__class__.__name__
     pos = item.pos()
     print itemType, pos.x(), pos.y()
-    
+    print '\t', hex(id(item))
+    if isinstance(item, Arrow):
+        print '\t\t', hex(id(item.myStartItem))
+        print '\t\t', hex(id(item.myEndItem))
+
 item.transform()
 item.type()
 type(item)

@@ -85,3 +85,26 @@ for attrName, data in serialized.iteritems():
 print printAttributes(item2, {})
 
 print printAttributes(item1, {})
+
+##
+
+# sitem = gscene.selectedItems()[0]
+# titem = DiagramTextItem(sitem, gscene)
+# titem.setPlainText('Sim1')
+# tfont = titem.font()
+# tfont.setPointSize(18)
+# titem.setFont(tfont)
+
+def parentTextItem(scene, item, text='Text'):
+    titem = DiagramTextItem(item, scene)
+    titem.setPlainText(text)
+    tfont = titem.font()
+    tfont.setPointSize(18)
+    titem.setFont(tfont)
+
+## 
+
+sitem = gscene.selectedItems()[0]
+
+sitem.childItems()
+sitem.parentItem()

@@ -1,3 +1,12 @@
+
+DiagramType = namedtuple("DiagramType", "Step Conditional StartEnd Io")._make(range(4))
+
+# For save
+DiagramType._fields[item.diagramType]
+
+# For load
+DiagramType._asdict()[DiagramType._fields[item.diagramType]]
+
 def build_dg(dg, items):
 
     def set_node_attrs(dg, item):

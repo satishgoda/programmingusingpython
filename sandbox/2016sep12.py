@@ -82,3 +82,9 @@ dump_dg(dg)
   {'name': u'Sim2', 'pos': (2734.0, 2238.0)},
   {'name': u'Merge1', 'pos': (2476.0, 2592.0)},
   {'name': u'Farm', 'pos': (2906.0, 3098.0)}]}
+
+
+##
+
+view.scene() == item.scene() == scene
+item.scene() == scene

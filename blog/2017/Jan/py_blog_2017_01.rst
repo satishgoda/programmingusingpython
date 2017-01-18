@@ -1,6 +1,11 @@
 .. contents::
   :backlinks: top
 
+TODO
+====
+
+* Monkey patching the command auto completion code in the Maya script editor
+
 Wed, Jan 18
 ============
 

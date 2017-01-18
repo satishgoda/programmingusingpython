@@ -4,49 +4,52 @@
 Wed, Jan 18
 ============
 
-class Foo(object):
-    __inst_dict = {}
-    
-    def __new__(cls, *args, **kwargs):
-        name = args[0]
+Studying the instance creation machinery::
 
-        if name in cls.__inst_dict:
-            oldinit = cls.__init__
-            
-            def __wrapinit__(self, *args, **kwargs):
-                print "__wrapinit__"
-                self.__class__.__init__ = oldinit            
-            cls.__init__ = __wrapinit__
-                
-            return cls.__inst_dict[name]
-        
-        self = super(cls, cls).__new__(cls)        
-        cls.__inst_dict[name] = self        
+  class Foo(object):
+      __inst_dict = {}
 
-        return self
-    
-    def __init__(self, name, age=0):
-        print "__init__"
-        self.name = name
+      def __new__(cls, *args, **kwargs):
+          name = args[0]
 
-##
+          if name in cls.__inst_dict:
+              oldinit = cls.__init__
 
-f1 = Foo('Foo 1')
-print f1
+              def __wrapinit__(self, *args, **kwargs):
+                  print "__wrapinit__"
+                  self.__class__.__init__ = oldinit            
+              cls.__init__ = __wrapinit__
 
-f2 = Foo('Foo 1')
-print f2
+              return cls.__inst_dict[name]
 
-print f1 == f2
+          self = super(cls, cls).__new__(cls)        
+          cls.__inst_dict[name] = self        
 
-##
+          return self
 
-"""
-__init__
-<__main__.Foo object at 0x048A7BF0>
-{'Foo 1': <__main__.Foo object at 0x048A7BF0>}
-__wrapinit__
-<__main__.Foo object at 0x048A7BF0>
-{'Foo 1': <__main__.Foo object at 0x048A7BF0>}
-True
-"""
+      def __init__(self, name, age=0):
+          print "__init__"
+          self.name = name
+
+  ##
+
+  f1 = Foo('Foo 1')
+  print f1
+
+  f2 = Foo('Foo 1')
+  print f2
+
+  print f1 == f2
+
+  ##
+
+  """
+  __init__
+  <__main__.Foo object at 0x048A7BF0>
+  {'Foo 1': <__main__.Foo object at 0x048A7BF0>}
+  __wrapinit__
+  <__main__.Foo object at 0x048A7BF0>
+  {'Foo 1': <__main__.Foo object at 0x048A7BF0>}
+  True
+  """
+```

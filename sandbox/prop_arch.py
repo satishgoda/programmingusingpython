@@ -101,7 +101,6 @@ class AppClass(object):
         for prop in group.properties:
             prop_path.append(prop.name)
             if isinstance(prop, PropertyGroup):
-                # self._printGroup(prop_path, group.__dict__[prop.name])
                 self._printGroup(prop_path, getattr(group, prop.name))
             else:
                 self._printLeaf(group, prop_path, prop)
@@ -114,7 +113,6 @@ class AppClass(object):
             prop_path = prop_base_path[:]
             prop_path.append(prop.name)
             if isinstance(prop, PropertyGroup):
-                # self._printGroup(prop_path, self.__dict__[prop.name])
                 self._printGroup(prop_path, getattr(self, prop.name))
             else:
                 self._printLeaf(self, prop_path, prop)
@@ -127,3 +125,8 @@ class RootNode(AppClass):
     description = StringProperty()
     renderGlobals = RenderGlobals()
     layerBlocks = LayerBlocks()
+
+
+if __name__ == '__main__':
+    root = RootNode()
+    root.printFromRoot()
